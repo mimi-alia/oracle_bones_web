@@ -17,7 +17,7 @@ homepage.addEventListener("click", function(){
     const homepageVideo = document.querySelector("#home > video");
     //background animation will switch to an animation emulating a change
     changeSRC(homepageVideo, "#");
-    //
+    //Create a room change for switching from landing to divination space with a delay of 2.5 secs
     function enterDivinationSpace(){
         changeRoom("./rooms/frontroom.html");
     }

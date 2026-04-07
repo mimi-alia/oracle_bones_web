@@ -92,6 +92,7 @@ h1.frontroom {
 	width: 100%;
 }
 
-#character-selection > * {
+
+#character-selection > div:hover {
 	background-color: red;
 }

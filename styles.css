@@ -50,6 +50,21 @@ table {
 :root {
 }
 
+.horizontal-layout {
+	display: flex;
+	flex-direction: row;
+	width: 100%;
+}
+
+.horizontal-layout > div {
+	width: 100%;
+	border: 5px solid black;
+    margin: 2px;
+    width: 20%;        
+    height: 200px;
+}
+
+
 /************************************ Home Page *********************************************/
 
 /* Video */
@@ -87,21 +102,12 @@ h1.frontroom {
 }
 
 
-#character-selection {
-	display: flex;
-	flex-direction: row;
-	width: 100%;
-}
-
 
 #character-selection > div:hover {
 	background-color: red;
 
 }
 
-#character-selection > div {
-	width: 100%;
-}
 
 #character-selection > div > span {
 	visibility: hidden;

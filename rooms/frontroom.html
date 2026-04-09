@@ -8,18 +8,19 @@
 </head>
 <body>
     <section class="frontroom container">
-       <h1 class="frontroom">Select your character</h1>
-        <section id="character-selection" class="frontroom"></section>
-        <script src="../frontroom.js "></script>
-        <!-- <script src="../scripts.js"></script> --> 
+        <h1 class="frontroom">Select your character</h1>
+        <section id="character-selection" class="frontroom horizontal-layout"></section>
     </section>
     <section id="selection-view">
+        <button id="definitions">Define</button>
         <button id="back">← Back</button>
-        <button id="back">← Back</button>
-        <button id="back">← Back</button>
-        <section id="character-selection-container">
+        <button id="details">Details</button>
+        <section id="selected-character-container" class="horizontal-layout">
             <div id="character-draw"></div>
-            <div id="selected-character"></div>
+            <div id="character-reference"></div>
         </section>
-    </section>
+        </section>
+    <script src="../frontroom.js "></script>
+    <!-- <script src="../scripts.js"></script> --> 
+</body>
 </html>

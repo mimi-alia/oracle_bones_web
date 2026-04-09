@@ -43,6 +43,8 @@ createScriptDiv(["#","#","#","#","#"]);
 const options = document.querySelectorAll("section#character-selection>div"); //Every character option in the character selection section
 const selectionViewSection = document.querySelector("#selection-view"); //Section viz'd after character selected
 const selectedCharacterContainer = document.querySelector("#character-reference"); // selected character in selection view
+//Character draw section for currently selected character
+const selectedCharacterDrawSpace = document.querySelector("#character-draw");
 
 //Selected Character View Buttons
 const defBtn = document.querySelector("definitions");
@@ -52,6 +54,7 @@ const detailBtn = document.querySelector("details");
 
 
 let currentSelection = null;
+let drawSuccess = false;
 let selectionHistory = new Set();
 
 function selectCharacter(){
@@ -72,10 +75,29 @@ function selectCharacter(){
 
         //add details from the currentSelection to the selectedCharacterContainer
 
-        selectedCharacterContainer.innerHTML = option.getAttribute("class")
+        selectedCharacterContainer.innerHTML = option.getAttribute("class");
 
     }));
     
 }
-
 selectCharacter();
+
+function showSuccess(){
+    selectedCharacterDrawSpace.addEventListener("click", () => {
+        if(drawSuccess){
+            setTimeout(returnToFrontroom, 2500);
+        } else {
+            drawSuccess++;
+        }  
+    })
+} 
+
+showSuccess();
+
+function returnToFrontroom(){
+    //make character selection view visible
+    frontroomContainer.style.visibility = "visible";
+
+    //make selected character view invisible
+    selectionViewSection.style.visibility = "hidden";
+}

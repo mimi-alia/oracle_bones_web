@@ -71,6 +71,7 @@ table {
 }
 
 /*********************************** Frontroom Page ******************************************/
+
 .frontroom.container {
 	display: flex;
 	flex-direction: column;
@@ -111,4 +112,10 @@ h1.frontroom {
 #character-selection > div:hover > span{
 	visibility: visible;
 	color: white;
+}
+
+/*********************************** Selected Character View ******************************************/
+
+#selection-view {
+	visibility: hidden;
 }

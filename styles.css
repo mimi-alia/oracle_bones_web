@@ -95,4 +95,20 @@ h1.frontroom {
 
 #character-selection > div:hover {
 	background-color: red;
+
+}
+
+#character-selection > div {
+	width: 100%;
+}
+
+#character-selection > div > span {
+	visibility: hidden;
+	font-size: 20px;
+
+}
+
+#character-selection > div:hover > span{
+	visibility: visible;
+	color: white;
 }

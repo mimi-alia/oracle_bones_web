@@ -90,11 +90,8 @@ function selectCharacter(){
 selectCharacter();
 
 function returnToFrontroom(){
-    //make character selection view visible
-    frontroomContainer.style.visibility = "visible";
-
-    //make selected character view invisible
-    selectionViewSection.style.visibility = "hidden";
+    //make character selection view visible & make selected character view invisible
+    setVisibility([frontroomContainer], [selectionViewSection])
 }
 
 

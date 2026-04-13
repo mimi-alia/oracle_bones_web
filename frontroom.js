@@ -57,21 +57,28 @@ let currentSelection = null;
 let drawSuccess = false;
 let selectionHistory = new Set();
 
+function setVisibility(visArr,hidArr){
+    visArr.forEach(el => {
+        el.style.visibility = "visible";
+    })
+
+    hidArr.forEach(el => {
+        el.style.visibility = "hidden";
+    })
+}
+
 function selectCharacter(){
     
     //When the character is selected, remove the other characters' visibility
     options.forEach(option => option.addEventListener("click", () => {
         //set currentSelection to selected div
         currentSelection = option;
-        console.log(option)
+        console.log(option);
         //add selected character to selectionHistory variable
-        selectionHistory.add(option)
+        selectionHistory.add(option);
 
-        //remove visibility of character selection view to selected character view
-        frontroomContainer.style.visibility = "hidden";
-
-        //make selected character view visible
-        selectionViewSection.style.visibility = "visible";
+        // make selected character view visible && remove visibility of character selection view to selected character view
+        setVisibility([selectionViewSection], [frontroomContainer])
 
         //add details from the currentSelection to the selectedCharacterContainer
 
@@ -82,9 +89,19 @@ function selectCharacter(){
 }
 selectCharacter();
 
+function returnToFrontroom(){
+    //make character selection view visible
+    frontroomContainer.style.visibility = "visible";
+
+    //make selected character view invisible
+    selectionViewSection.style.visibility = "hidden";
+}
+
+
 function showSuccess(){
     selectedCharacterDrawSpace.addEventListener("click", () => {
         if(drawSuccess){
+            alert("Activity completed successfully, taking you back to the front room!")
             setTimeout(returnToFrontroom, 2500);
         } else {
             drawSuccess++;
@@ -94,10 +111,3 @@ function showSuccess(){
 
 showSuccess();
 
-function returnToFrontroom(){
-    //make character selection view visible
-    frontroomContainer.style.visibility = "visible";
-
-    //make selected character view invisible
-    selectionViewSection.style.visibility = "hidden";
-}

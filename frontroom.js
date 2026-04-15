@@ -1,8 +1,59 @@
 const characterSelectionSection = document.querySelector("#character-selection");
-const frontroomContainer = document.querySelector(".frontroom.container")
-const frontroomSectionTitle = document.createElement("span")
+const frontroomContainer = document.querySelector(".frontroom.container");
+const frontroomSectionTitle = document.createElement("span");
 
 // function styleElement(...styles){}
+
+const characters = {
+    妇 : {
+        modernCharacter: "妇",
+        pinyin: "fù",
+        radicals:["女 (nǚ) woman"],
+        definition:"(lit\）woman good. Here, the name of Fu Hao, a wife of the emperor leading the battle",
+        text:"",
+        references: ["http://jiaguwen.shufami.com/?char=%E5%A6%87&la", "yout=1&size=128&hspace=0&vspace=0&forecolor=%23000000&backcolor=%23d7d5d0&order="],
+        images: "",
+        isSuccess: undefined,
+    },
+    好 : {
+        modernCharacter: "好",
+        pinyin: "hǎo",
+        radicals:["女 (nǚ) woman", "子 (zǐ) child"],
+        definition:"(lit\）woman good. Here, the name of Fu Hao, a wife of the emperor leading the battle",
+        text: "",
+        references: ["http://jiaguwen.shufami.com/?char=%E5%A6%87&la", "http://jiaguwen.shufami.com/?char=%E5%"],
+        images: "",
+        isSuccess: undefined,
+    },
+    伐 : {
+        modernCharacter: "好",
+        pinyin: "fá",
+        radicals:["人 (rén) person", "戈 (gē) halberd\； dagger axe"],
+        definition: "attack",
+        text: "",
+        references: ["http://jiaguwen.shufami.com/?char=%E4%BC%90&layout=1&size=128&hspace=0&vspace=0&forecolor=%23000000&backcolor=%23d7d5d0&order="],
+        images: "",
+        isSuccess: undefined,
+    },
+    佑 : {
+        modernCharacter: "佑",
+        pinyin: "yòu",
+        radicals: ["人 (rén) person", "右 (yòu)  right-hand side"],
+        definition: "Blessing\; protection",
+        references: "http://jiaguwen.shufami.com/?char=%E4%BD%91&layout=1&size=128&hspace=0&vspace=0&forecolor=%23000000&backcolor=%23d7d5d0&order=",
+        images: "",
+        isSuccess: undefined,
+    },
+    卜: {
+        modernCharacter: "卜",
+        pinyin: "bo",
+        radicals: ["A radical that resembles the crack in the bone"],
+        definition: "To divinate",
+        references: "http://jiaguwen.shufami.com/?char=%E5%8D%9C&layout=1&size=128&hspace=0&vspace=0&forecolor=%23000000&backcolor=%23d7d5d0&order=",
+        images: "",
+        isSuccess: undefined,
+    },
+    }
 
 
 //Function that initializes character selection divs
@@ -85,8 +136,7 @@ detailBackBtn.addEventListener("click", () => {
 
 
 let currentSelection = null;
-let drawSuccess = false;
-let selectionHistory = new Set();
+let completionHistory = new Set();
 
 // function checkOptionsClassName(){
 //     for (let option in options){
@@ -159,14 +209,15 @@ function returnToFrontroom(){
 
 
 function showSuccess(){
+    drawSuccess = false;
+    console.log(drawSuccess)
     selectedCharacterDrawSpace.addEventListener("click", () => {
-        if(drawSuccess){
-            alert("Activity completed successfully continue exploration?")
-            // setTimeout(returnToFrontroom, 2500);
-            setVisibility([defBtn, selectionBackBtn, detailBtn]);
-        } else {
-            drawSuccess++;
-        }  
+        console.log(drawSuccess)
+        drawSuccess = true;
+        console.log(drawSuccess)
+        alert("Activity completed successfully continue exploration?");
+        setVisibility([defBtn, selectionBackBtn, detailBtn]);
+        completionHistory.add()
     })
 } 
 

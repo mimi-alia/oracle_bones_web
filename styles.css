@@ -121,6 +121,10 @@ h1.frontroom {
 
 /*********************************** Selected Character View ******************************************/
 
-#selection-view {
+#selection-view,
+#selection-view > button,
+#definitions-view,
+#detail-view
+{
 	visibility: hidden;
 }

@@ -1,6 +1,6 @@
-const characterSelectionSection = document.querySelector("#character-selection");
 const frontroomContainer = document.querySelector(".frontroom.container");
-const frontroomSectionTitle = document.createElement("span");
+const characterSelectionSection = document.querySelector("#character-selection");
+
 
 // function styleElement(...styles){}
 
@@ -26,7 +26,7 @@ const characters = {
         isSuccess: undefined,
     },
     伐 : {
-        modernCharacter: "好",
+        modernCharacter: "伐",
         pinyin: "fá",
         radicals:["人 (rén) person", "戈 (gē) halberd\； dagger axe"],
         definition: "attack",
@@ -57,16 +57,20 @@ const characters = {
 
 
 //Function that initializes character selection divs
-function createScriptDiv(scriptImageLinkArr){
+function createScriptDiv(characterObj){
     const imagesFragment = new DocumentFragment(); 
     //create and style divs, their children, add to fragment
-    for (let imageLink in scriptImageLinkArr){  
+
+    for (let obj in Object.entries(characterObj)){
+        const characterInfo = Object.entries(characterObj)[obj][1];
+
         const imgDiv = document.createElement("div");
         //add a class set to its index for future targeting
-        imgDiv.setAttribute("class", imageLink)
+        imgDiv.setAttribute("class", characterInfo.modernCharacter)
+        imgDiv.setAttribute("data-id", characterInfo.modernCharacter)
 
         const holderText = document.createElement("span");
-        holderText.innerText = imageLink;
+        holderText.innerText = characterInfo.modernCharacter;
 
         imgDiv.appendChild(holderText);
         imgDiv.style.border = "5px solid black";
@@ -75,7 +79,7 @@ function createScriptDiv(scriptImageLinkArr){
         imgDiv.style.height = "200px";
 
         const image = document.createElement("img");
-        image.setAttribute("src", `${imageLink}`);
+        image.setAttribute("src", "#");
         image.style.width = "inherit";
         imgDiv.appendChild(image);
 
@@ -86,7 +90,7 @@ function createScriptDiv(scriptImageLinkArr){
     characterSelectionSection.appendChild(imagesFragment);
 }
 
-createScriptDiv(["#","#","#","#","#"]);
+createScriptDiv(characters);
 
 
 //Functions that handle character selection storage and visualization

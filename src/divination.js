@@ -141,12 +141,40 @@ detailBackBtn.addEventListener("click", () => {
 })
 
 
+//Character select and draw div functions and variables
+
 let currentSelection = null;
 let completionHistory = new Set();
 
+
+//Character select div functionality
+
+options.forEach(option => option.addEventListener("click", () => {
+    selectCharacter(option);
+}
+))
+
+function selectCharacter(characterOption){
+    //set currentSelection to selected div
+    currentSelection = characterOption;
+    console.log(characterOption);
+
+    // make selected character view visible && remove visibility of character selection view to selected character view
+    setVisibility([selectedCharacterView], [frontroomContainer])
+
+    //add details from the currentSelection to the selectedCharacterReference
+
+    selectedCharacterReference.innerHTML = characterOption.getAttribute("class");
+
+}
+
+    
+
+//Character draw div functionality
+
 // function checkOptionsClassName(){
 //     for (let option in options){
-//         return selectionHistory.has(option);
+//         return completionHistory.has(option);
 //     }
 // }
 
@@ -154,7 +182,7 @@ function setVisibility(visArr,hidArr){
     if(visArr){
         for (let i in visArr){
             //if the current element to modify is the selection view section, and that section has been visited (is logged in the selection history), then show all buttons
-            if (visArr[i] === selectedCharacterView && (selectionHistory.has(selectedCharacterReference.innerHTML))){
+            if (visArr[i] === selectedCharacterView && (completionHistory.has(selectedCharacterReference.innerHTML))){
                 //set iteration to selectedCharacterView.childElementCount instead of selectedCharacterView.children, because there are extra items in the children list that aren't just child elements
                 for(let i = 0; i < selectedCharacterView.childElementCount; i++){
                     selectedCharacterView.children[i].style.visibility = "visible";
@@ -178,7 +206,7 @@ function setVisibility(visArr,hidArr){
 
 //helper that checks if option has been selected before and populates selection 
 function populateSelectionDiv(el){
-    if (selectionHistory.has(el.className)){
+    if (completionHistory.has(el.className)){
        console.log(el) 
     } else {
        
@@ -186,27 +214,7 @@ function populateSelectionDiv(el){
 }
 
 
-function selectCharacter(){
-    
-    //When the character is selected, remove the other characters' visibility
-    options.forEach(option => option.addEventListener("click", () => {
-        //set currentSelection to selected div
-        currentSelection = option;
-        console.log(option);
-        //add selected character to selectionHistory variable
-        selectionHistory.add(option.className);
 
-        // make selected character view visible && remove visibility of character selection view to selected character view
-        setVisibility([selectedCharacterView], [frontroomContainer])
-
-        //add details from the currentSelection to the selectedCharacterReference
-
-        selectedCharacterContainer.innerHTML = option.getAttribute("class");
-
-    }));
-    
-}
-selectCharacter();
 
 function returnToFrontroom(){
     //make character selection view visible & make selected character view invisible
@@ -214,19 +222,21 @@ function returnToFrontroom(){
 }
 
 
-function showSuccess(){
-    drawSuccess = false;
-    console.log(drawSuccess)
-    selectedCharacterDrawSpace.addEventListener("click", () => {
-        console.log(drawSuccess)
-        drawSuccess = true;
-        console.log(drawSuccess)
-        alert("Activity completed successfully continue exploration?");
-        setVisibility([defBtn, selectionBackBtn, detailBtn]);
-        completionHistory.add()
-    })
-} 
+selectedCharacterDrawSpace.addEventListener("click", console.log("  "))
 
-showSuccess();
+// function showSuccess(){
+//     drawSuccess = false;
+//     console.log(drawSuccess)
+//     selectedCharacterDrawSpace.addEventListener("click", () => {
+//         console.log(drawSuccess)
+//         drawSuccess = true;
+//         console.log(drawSuccess)
+//         alert("Activity completed successfully continue exploration?");
+//         setVisibility([defBtn, selectionBackBtn, detailBtn]);
+//         completionHistory.add()
+//     })
+// } 
+
+// showSuccess();
 
 

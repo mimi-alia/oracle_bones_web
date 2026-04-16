@@ -124,6 +124,12 @@ selectionBackBtn.addEventListener("click", () => {
     setTimeout(returnToFrontroom, 2500);
 })
 
+function returnToFrontroom(){
+    //make character selection view visible & make selected character view invisible
+    setVisibility([frontroomContainer], [selectedCharacterView, defBtn, selectionBackBtn, detailBtn])
+}
+
+
 defBtn.addEventListener("click", () => {
     setVisibility([definitionsView], [selectedCharacterView, defBtn, selectionBackBtn, detailBtn]);
 })
@@ -168,9 +174,41 @@ function selectCharacter(characterOption){
 
 }
 
+
     
 
 //Character draw div functionality
+
+selectedCharacterDrawSpace.addEventListener("click", (e) => {
+    checkSuccess(e.target);
+});
+
+
+//function that checks if player successfully completes drawing task
+
+function isSuccess(el){
+    if (completionHistory.has(el) ) {
+        return true;
+    } else {
+        completionHistory.add(el);
+    }
+    
+}
+
+function showSuccess(){
+    alert("Divination complete! Explore further?");
+    setVisibility([defBtn, selectionBackBtn, detailBtn]);
+}
+
+function checkSuccess(el){
+    if (isSuccess(el)){
+        showSuccess();
+    } else {
+        alert("hm...wonder what went wrong")
+    }
+}
+
+
 
 // function checkOptionsClassName(){
 //     for (let option in options){
@@ -212,17 +250,6 @@ function populateSelectionDiv(el){
        
     }
 }
-
-
-
-
-function returnToFrontroom(){
-    //make character selection view visible & make selected character view invisible
-    setVisibility([frontroomContainer], [selectedCharacterView, defBtn, selectionBackBtn, detailBtn])
-}
-
-
-selectedCharacterDrawSpace.addEventListener("click", console.log("  "))
 
 // function showSuccess(){
 //     drawSuccess = false;

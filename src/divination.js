@@ -160,10 +160,22 @@ options.forEach(option => option.addEventListener("click", () => {
 }
 ))
 
+//function that takes the data attribute of the character selection and adds it to the character draw and reference divs
+function generateCharacterDrawDivData(characterOption){
+    const charDataID = characterOption.dataset.id;
+    // console.log("Character Data ID at the generateCharacterDrawDivData function " + charDataID)
+    selectedCharacterDrawSpace.setAttribute("data-id", charDataID);
+    selectedCharacterReference.setAttribute("data-id", charDataID);
+    // console.log("Character Character DrawSpace Data ID after attempted set at the generateCharacterDrawDivData function " + selectedCharacterDrawSpace.dataset.id)
+
+}
+
 function selectCharacter(characterOption){
     //set currentSelection to selected div
     currentSelection = characterOption;
-    console.log(characterOption);
+
+    //modify the character view and drawspace divs have the same data id as the div that was selected
+    generateCharacterDrawDivData(characterOption);
 
     // make selected character view visible && remove visibility of character selection view to selected character view
     setVisibility([selectedCharacterView], [frontroomContainer])
@@ -180,17 +192,27 @@ function selectCharacter(characterOption){
 //Character draw div functionality
 
 selectedCharacterDrawSpace.addEventListener("click", (e) => {
-    checkSuccess(e.target);
+    checkSuccess(e.target); 
 });
 
 
 //function that checks if player successfully completes drawing task
 
+// //helper that checks if option has been selected before and populates selection 
+// function populateSelectionDiv(el){
+//     if (completionHistory.has(el.className)){
+//        console.log(el) 
+//     } else {
+       
+//     }
+// }
+
 function isSuccess(el){
-    if (completionHistory.has(el) ) {
+    const elementDataID = el.dataset.id;
+    if (completionHistory.has(elementDataID) ) {
         return true;
     } else {
-        completionHistory.add(el);
+        completionHistory.add(elementDataID);
     }
     
 }
@@ -242,14 +264,6 @@ function setVisibility(visArr,hidArr){
 
 }
 
-//helper that checks if option has been selected before and populates selection 
-function populateSelectionDiv(el){
-    if (completionHistory.has(el.className)){
-       console.log(el) 
-    } else {
-       
-    }
-}
 
 // function showSuccess(){
 //     drawSuccess = false;

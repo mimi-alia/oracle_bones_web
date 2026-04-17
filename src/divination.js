@@ -242,7 +242,9 @@ function setVisibility(visArr,hidArr){
         visArr.forEach(el => {
             el.style.visibility = "visible";
         })
+    }
 
+    if (visArr?.includes(selectedCharacterView)) {
         if (completionHistory.has(selectedCharacterDrawSpace.dataset.id)){
             defBtn.style.visibility = "visible";
             selectionBackBtn.style.visibility = "visible";
@@ -255,9 +257,6 @@ function setVisibility(visArr,hidArr){
             el.style.visibility = "hidden"
         })
     }
-
-
-
 }
 
 

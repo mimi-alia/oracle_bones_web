@@ -238,18 +238,16 @@ function checkSuccess(el){
 // }
 
 function setVisibility(visArr,hidArr){
-
     if (visArr){
         visArr.forEach(el => {
-            if (el === selectedCharacterView && completionHistory.has(selectedCharacterDrawSpace.dataset.id)){
-                el.style.visibility === "visible";
-                defBtn.style.visibility = "visible";
-                selectionBackBtn.style.visibility = "visible";
-                detailBtn.style.visibility = "visible";
-            }
-
-            el.style.visibility = "visible"
+            el.style.visibility = "visible";
         })
+
+        if (completionHistory.has(selectedCharacterDrawSpace.dataset.id)){
+            defBtn.style.visibility = "visible";
+            selectionBackBtn.style.visibility = "visible";
+            detailBtn.style.visibility = "visible";
+        }
     }
 
     if (hidArr) {
@@ -257,6 +255,8 @@ function setVisibility(visArr,hidArr){
             el.style.visibility = "hidden"
         })
     }
+
+
 
 }
 

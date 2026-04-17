@@ -135,7 +135,7 @@ defBtn.addEventListener("click", () => {
 })
 
 defBackBtn.addEventListener("click", () => {
-    setVisibility([selectedCharacterView], [definitionsView, defBtn, selectionBackBtn, detailBtn]);
+    setVisibility([selectedCharacterView], [definitionsView]);
 })
 
 detailBtn.addEventListener("click", () => {
@@ -143,7 +143,7 @@ detailBtn.addEventListener("click", () => {
 })
 
 detailBackBtn.addEventListener("click", () => {
-    setVisibility([selectedCharacterView], [detailsView, defBtn, selectionBackBtn, detailBtn]);
+    setVisibility([selectedCharacterView], [detailsView]);
 })
 
 
@@ -192,7 +192,7 @@ function selectCharacter(characterOption){
 //Character draw div functionality
 
 selectedCharacterDrawSpace.addEventListener("click", (e) => {
-    checkSuccess(e.target); 
+    checkSuccess(e.currentTarget); 
 });
 
 
@@ -209,12 +209,15 @@ selectedCharacterDrawSpace.addEventListener("click", (e) => {
 
 function isSuccess(el){
     const elementDataID = el.dataset.id;
-    if (completionHistory.has(elementDataID) ) {
+
+    if (!completionHistory.has(elementDataID)) {
+        completionHistory.add(elementDataID);
         return true;
     } else {
-        completionHistory.add(elementDataID);
+        return true;
     }
-    
+
+    return false; // returns false if some other error
 }
 
 function showSuccess(){
@@ -232,35 +235,79 @@ function checkSuccess(el){
 
 
 
-// function checkOptionsClassName(){
-//     for (let option in options){
-//         return completionHistory.has(option);
-//     }
-// }
+//helper function that checks if a character has successfully been drawn and sets style of character draw view based on that
+
+function styleSelectedCharacterView(el){
+    if (completionHistory.has(selectedCharacterDrawSpace.dataset.id)){
+        el.style.visibility = "visible";
+        for(let i = 0; i < el.childElementCount; i++){
+            el.children[i].style.visibility = "visible";
+        }
+    } else {
+        el.style.visibility = "visible";
+    }
+}
+
+function hideSelectedCharacterView(el){
+    el.style.visibility = "hidden";
+        for(let i = 0; i < el.childElementCount; i++){
+            el.children[i].style.visibility = "hidden";
+        }
+}
 
 function setVisibility(visArr,hidArr){
-    if(visArr){
-        for (let i in visArr){
-            //if the current element to modify is the selection view section, and that section has been visited (is logged in the selection history), then show all buttons
-            if (visArr[i] === selectedCharacterView && (completionHistory.has(selectedCharacterReference.innerHTML))){
-                //set iteration to selectedCharacterView.childElementCount instead of selectedCharacterView.children, because there are extra items in the children list that aren't just child elements
-                for(let i = 0; i < selectedCharacterView.childElementCount; i++){
-                    selectedCharacterView.children[i].style.visibility = "visible";
-                }
-                visArr[i].style.visibility = "visible";
-            } else {
-                    visArr.forEach(el => {
-                    el.style.visibility = "visible";
-                })
-            }
-        }
-    } 
-    
+
+    if (visArr){
+        visArr.forEach(el => {
+            el.style.visibility = "visible"
+        })
+    }
+
     if (hidArr) {
         hidArr.forEach(el => {
-        el.style.visibility = "hidden";
-    })
+            el.style.visibility = "hidden"
+        })
     }
+    //     if (visArr){
+    //     visArr.forEach(el => {
+    //         if (el === selectedCharacterView){
+    //             styleSelectedCharacterView(el);
+    //         } else {
+    //             el.style.visibility = "visible";
+    //         }
+    //     });
+    // }
+
+    // if (hidArr){
+    //     hidArr.forEach(el => {
+    //         if (el === selectedCharacterView){
+    //             hideSelectedCharacterView(el);
+    //         } else {
+    //             el.style.visibility = "hidden";
+    //         }
+    //     });
+    // }
+
+
+    // if(visArr){
+    //     for (let i in visArr){
+    //         if (visArr[i] === selectedCharacterView){
+    //             console.log("visualizing the selectedCharacterView")
+    //             styleSelectedCharacterView(visArr[i])
+    //         } else {
+    //             visArr[i].style.visibility = "visible";
+    //         }
+    //     }
+    // }   
+    // if (hidArr) {
+    //     for (let i in hidArr){
+    //         if (hidArr[i] === selectedCharacterView){
+    //             hideSelectedCharacterView(hidArr[i]);
+    //         } else {
+    //             hidArr[i].style.visibility = "hidden";
+    //         }
+    //     }
+    // }
 
 }
 

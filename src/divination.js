@@ -157,6 +157,7 @@ let completionHistory = new Set();
 
 options.forEach(option => option.addEventListener("click", () => {
     selectCharacter(option);
+    setVisibility([selectedCharacterView], [frontroomContainer]);
 }
 ))
 
@@ -177,11 +178,7 @@ function selectCharacter(characterOption){
     //modify the character view and drawspace divs have the same data id as the div that was selected
     generateCharacterDrawDivData(characterOption);
 
-    // make selected character view visible && remove visibility of character selection view to selected character view
-    setVisibility([selectedCharacterView], [frontroomContainer])
-
     //add details from the currentSelection to the selectedCharacterReference
-
     selectedCharacterReference.innerHTML = characterOption.getAttribute("class");
 
 }
@@ -196,16 +193,6 @@ selectedCharacterDrawSpace.addEventListener("click", (e) => {
 });
 
 
-//function that checks if player successfully completes drawing task
-
-// //helper that checks if option has been selected before and populates selection 
-// function populateSelectionDiv(el){
-//     if (completionHistory.has(el.className)){
-//        console.log(el) 
-//     } else {
-       
-//     }
-// }
 
 function isSuccess(el){
     const elementDataID = el.dataset.id;
@@ -259,6 +246,13 @@ function setVisibility(visArr,hidArr){
 
     if (visArr){
         visArr.forEach(el => {
+            if (el === selectedCharacterView && completionHistory.has(selectedCharacterDrawSpace.dataset.id)){
+                el.style.visibility === "visible";
+                defBtn.style.visibility = "visible";
+                selectionBackBtn.style.visibility = "visible";
+                detailBtn.style.visibility = "visible";
+            }
+
             el.style.visibility = "visible"
         })
     }
@@ -268,63 +262,8 @@ function setVisibility(visArr,hidArr){
             el.style.visibility = "hidden"
         })
     }
-    //     if (visArr){
-    //     visArr.forEach(el => {
-    //         if (el === selectedCharacterView){
-    //             styleSelectedCharacterView(el);
-    //         } else {
-    //             el.style.visibility = "visible";
-    //         }
-    //     });
-    // }
-
-    // if (hidArr){
-    //     hidArr.forEach(el => {
-    //         if (el === selectedCharacterView){
-    //             hideSelectedCharacterView(el);
-    //         } else {
-    //             el.style.visibility = "hidden";
-    //         }
-    //     });
-    // }
-
-
-    // if(visArr){
-    //     for (let i in visArr){
-    //         if (visArr[i] === selectedCharacterView){
-    //             console.log("visualizing the selectedCharacterView")
-    //             styleSelectedCharacterView(visArr[i])
-    //         } else {
-    //             visArr[i].style.visibility = "visible";
-    //         }
-    //     }
-    // }   
-    // if (hidArr) {
-    //     for (let i in hidArr){
-    //         if (hidArr[i] === selectedCharacterView){
-    //             hideSelectedCharacterView(hidArr[i]);
-    //         } else {
-    //             hidArr[i].style.visibility = "hidden";
-    //         }
-    //     }
-    // }
 
 }
 
-
-// function showSuccess(){
-//     drawSuccess = false;
-//     console.log(drawSuccess)
-//     selectedCharacterDrawSpace.addEventListener("click", () => {
-//         console.log(drawSuccess)
-//         drawSuccess = true;
-//         console.log(drawSuccess)
-//         alert("Activity completed successfully continue exploration?");
-//         setVisibility([defBtn, selectionBackBtn, detailBtn]);
-//         completionHistory.add()
-//     })
-// } 
-
-// showSuccess();
 
 

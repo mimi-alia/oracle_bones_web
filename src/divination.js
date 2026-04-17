@@ -1,9 +1,6 @@
 const frontroomContainer = document.querySelector(".frontroom.container");
 const characterSelectionSection = document.querySelector("#character-selection");
 
-
-// function styleElement(...styles){}
-
 const characters = {
     妇 : {
         modernCharacter: "妇",
@@ -164,11 +161,9 @@ options.forEach(option => option.addEventListener("click", () => {
 //function that takes the data attribute of the character selection and adds it to the character draw and reference divs
 function generateCharacterDrawDivData(characterOption){
     const charDataID = characterOption.dataset.id;
-    // console.log("Character Data ID at the generateCharacterDrawDivData function " + charDataID)
+    
     selectedCharacterDrawSpace.setAttribute("data-id", charDataID);
     selectedCharacterReference.setAttribute("data-id", charDataID);
-    // console.log("Character Character DrawSpace Data ID after attempted set at the generateCharacterDrawDivData function " + selectedCharacterDrawSpace.dataset.id)
-
 }
 
 function selectCharacter(characterOption){

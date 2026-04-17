@@ -222,25 +222,25 @@ function checkSuccess(el){
 
 
 
-//helper function that checks if a character has successfully been drawn and sets style of character draw view based on that
+//helper function that checks if a character has successfully been drawn and sets style of character draw view based on that ---obsolete 
 
-function styleSelectedCharacterView(el){
-    if (completionHistory.has(selectedCharacterDrawSpace.dataset.id)){
-        el.style.visibility = "visible";
-        for(let i = 0; i < el.childElementCount; i++){
-            el.children[i].style.visibility = "visible";
-        }
-    } else {
-        el.style.visibility = "visible";
-    }
-}
+// function styleSelectedCharacterView(el){
+//     if (completionHistory.has(selectedCharacterDrawSpace.dataset.id)){
+//         el.style.visibility = "visible";
+//         for(let i = 0; i < el.childElementCount; i++){
+//             el.children[i].style.visibility = "visible";
+//         }
+//     } else {
+//         el.style.visibility = "visible";
+//     }
+// }
 
-function hideSelectedCharacterView(el){
-    el.style.visibility = "hidden";
-        for(let i = 0; i < el.childElementCount; i++){
-            el.children[i].style.visibility = "hidden";
-        }
-}
+// function hideSelectedCharacterView(el){
+//     el.style.visibility = "hidden";
+//         for(let i = 0; i < el.childElementCount; i++){
+//             el.children[i].style.visibility = "hidden";
+//         }
+// }
 
 function setVisibility(visArr,hidArr){
 

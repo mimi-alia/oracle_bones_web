@@ -275,13 +275,13 @@ function renderDefinitionsTable(characters){
 
     const headerRow = document.createElement("tr")
     const headerRowFragment = new DocumentFragment();
-    const bodyRow = document.createElement("tr")
     const bodyRowFragment = new DocumentFragment();
 
     const headers = ["Modern Character", "Pinyin", "Radicals", "Definition", "References"]
 
     headers.forEach(header => {
         const th = document.createElement("th");
+        th.setAttribute("scope", "col")
         th.innerHTML = header;
         headerRowFragment.append(th);
     })
@@ -289,26 +289,22 @@ function renderDefinitionsTable(characters){
     entries.forEach(entry => {
         entry = entry[1];
 
-        for (let item in entry){
-            if (typeof entry[item] === "object") {
-                console.log(`${item} is the data type ${typeof entry[item]}`)
-            }
+        const bodyRow = document.createElement("tr");
         
         for (let item in entry){
-
+            const cell = document.createElement("td");
+            cell.innerHTML = entry[item];
+            bodyRow.appendChild(cell);
         }
 
-        }
-        
-        headerRow.appendChild(headerRowFragment);
-        tableHead.appendChild(headerRow);
-        definitionsTable.appendChild(tableHead);
-
-
-
+        bodyRowFragment.append(bodyRow);
+        tableBody.appendChild(bodyRow);
 
     })
 
-    // definitionsTable.style.visibility = "visible";
+    headerRow.appendChild(headerRowFragment);
+    tableHead.appendChild(headerRow);
+    definitionsTable.appendChild(tableHead);
+    definitionsTable.appendChild(tableBody);
 }
 

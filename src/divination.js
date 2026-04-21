@@ -188,17 +188,16 @@ function selectCharacter(characterOption){
 
 selectedCharacterDrawSpace.addEventListener("click", (e) => {
     checkSuccess(e.currentTarget); 
-}, {once: true});
+});
 
 
 function isSuccess(el){
     const elementDataID = el.dataset.id;
-
     if (!completionHistory.has(elementDataID)) {
         completionHistory.add(elementDataID);
         return true;
     } else {
-        return;
+        return false;
     }
 }
 
@@ -207,12 +206,22 @@ function showSuccess(){
     setVisibility([defBtn, selectionBackBtn, detailBtn]);
 }
 
-function checkSuccess(el){
-    if (isSuccess(el)){
-        showSuccess();
+function setDrawSpaceEventListener(status){
+    if(status){
+        selectedCharacterDrawSpace.removeEventListener("click", checkSuccess);
     } else {
-        alert("hm...wonder what went wrong")
+        selectedCharacterDrawSpace.addEventListener("click", (e) => {
+    checkSuccess(e.currentTarget); 
+        })
     }
+}
+
+function checkSuccess(el){
+    const successStatus = isSuccess(el);
+    if (successStatus){
+        showSuccess();
+    }
+    setDrawSpaceEventListener(successStatus);
 }
 
 
@@ -269,6 +278,10 @@ function setVisibility(visArr,hidArr){
 
 function renderDefinitionsTable(characters){
     const entries  = Object.entries(characters);
+    const tableElement = document.querySelector("table");
+
+    const tableElementChildren = tableElement.children;
+
     const tableHead = document.createElement("thead");
     const tableBody = document.createElement("tbody");
 
@@ -278,6 +291,9 @@ function renderDefinitionsTable(characters){
 
     const headers = ["Modern Character", "Pinyin", "Radicals", "Definition", "References"]
 
+    while (tableElement.firstChild) {
+        tableElement.removeChild(tableElement.firstChild);
+    }
     headers.forEach(header => {
         const th = document.createElement("th");
         th.setAttribute("scope", "col")

@@ -107,6 +107,7 @@ const detailBtn = document.querySelector("#details");
 
 //Definitions view
 const definitionsView = document.querySelector("#definitions-view");
+const definitionsTable = document.querySelector("#definitions-view>div>table")
 const defBackBtn = document.querySelector("#def-back");
 
 //Details view
@@ -252,6 +253,11 @@ function setVisibility(visArr,hidArr){
         }
     }
 
+    if (visArr?.includes(definitionsView)) {
+        renderDefinitionsTable(characters);
+    }
+
+
     if (hidArr) {
         hidArr.forEach(el => {
             el.style.visibility = "hidden"
@@ -259,5 +265,50 @@ function setVisibility(visArr,hidArr){
     }
 }
 
+//table loading functionaloity
 
+
+function renderDefinitionsTable(characters){
+    const entries  = Object.entries(characters);
+    const tableHead = document.createElement("thead");
+    const tableBody = document.createElement("tbody");
+
+    const headerRow = document.createElement("tr")
+    const headerRowFragment = new DocumentFragment();
+    const bodyRow = document.createElement("tr")
+    const bodyRowFragment = new DocumentFragment();
+
+    const headers = ["Modern Character", "Pinyin", "Radicals", "Definition", "References"]
+
+    headers.forEach(header => {
+        const th = document.createElement("th");
+        th.innerHTML = header;
+        headerRowFragment.append(th);
+    })
+
+    entries.forEach(entry => {
+        entry = entry[1];
+
+        for (let item in entry){
+            if (typeof entry[item] === "object") {
+                console.log(`${item} is the data type ${typeof entry[item]}`)
+            }
+        
+        for (let item in entry){
+
+        }
+
+        }
+        
+        headerRow.appendChild(headerRowFragment);
+        tableHead.appendChild(headerRow);
+        definitionsTable.appendChild(tableHead);
+
+
+
+
+    })
+
+    // definitionsTable.style.visibility = "visible";
+}
 

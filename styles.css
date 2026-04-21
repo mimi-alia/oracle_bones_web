@@ -128,3 +128,10 @@ h1.frontroom {
 {
 	visibility: hidden;
 }
+
+
+#definitions-view > div > table {
+	border: 2px solid black;
+	height: 100%;
+	width: 100%;
+}

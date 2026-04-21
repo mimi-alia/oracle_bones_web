@@ -180,14 +180,15 @@ function selectCharacter(characterOption){
 }
 
 
-    
+    function testOnce(){
+        console.log("trigger once")
+    }
 
 //Character draw div functionality
 
 selectedCharacterDrawSpace.addEventListener("click", (e) => {
     checkSuccess(e.currentTarget); 
-});
-
+}, {once: true});
 
 
 function isSuccess(el){
@@ -197,10 +198,8 @@ function isSuccess(el){
         completionHistory.add(elementDataID);
         return true;
     } else {
-        return true;
+        return;
     }
-
-    return false; // returns false if some other error
 }
 
 function showSuccess(){

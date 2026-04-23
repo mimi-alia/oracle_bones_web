@@ -277,8 +277,7 @@ function setVisibility(visArr,hidArr){
 
 
 function renderDefinitionsTable(characters){
-    const entries  = Object.entries(characters);
-    const tableElement = document.querySelector("table");
+    const entries  = Object.values(characters);
 
     const tableHead = document.createElement("thead");
     const tableBody = document.createElement("tbody");
@@ -289,8 +288,8 @@ function renderDefinitionsTable(characters){
 
     const headers = ["Modern Character", "Pinyin", "Radicals", "Definition", "References"]
 
-    while (tableElement.firstChild) {
-        tableElement.removeChild(tableElement.firstChild);
+    while (definitionsTable.firstChild) {
+        definitionsTable.removeChild(definitionsTable.firstChild);
     }
 
     headers.forEach(header => {
@@ -301,24 +300,48 @@ function renderDefinitionsTable(characters){
     })
 
     entries.forEach(entry => {
-        entry = entry[1];
-        
+
         //adds in order of character object, not completionHistory
         if (completionHistory.has(entry.modernCharacter)){
             const bodyRow = document.createElement("tr");
         
             for (let item in entry){
-                if(entry[item]){
-                   const cell = document.createElement("td");
+
+                //if an item is falsy, continue / skip
+                if (!entry[item]) continue;
+
+                //create a table cell for each truthy item in entry (object)
+                const cell = document.createElement("td");
+
+                //if the entry key is references, create an unordered list with anchor list items and add them to the cells
+                if (item === "references") {
+                    const linkList = document.createElement("ul");
+
+                    entry.references.forEach(reference => {
+                        const listItem = document.createElement("li");
+                        const anchor = document.createElement("a");
+
+                        anchor.innerHTML = reference;
+                        anchor.setAttribute("href", reference)
+                        listItem.appendChild(anchor);
+                        linkList.appendChild(listItem);
+                    });
+
+                cell.appendChild(linkList);
+
+                //otherwise, as long as the key isnt text or images, add the value to the cell's innerHTML
+                } else if (item !== "text" && item !== "images") {
                     cell.innerHTML = entry[item];
-                    bodyRow.appendChild(cell); 
                 }
+
+            //Append the cell to the row
+             bodyRow.appendChild(cell);
             }
 
+            //Add the row to the fragment, then add that fragment to the table body
             bodyRowFragment.append(bodyRow);
-            tableBody.appendChild(bodyRow);
         }
-
+        tableBody.appendChild(bodyRowFragment);
     })
 
     headerRow.appendChild(headerRowFragment);

@@ -117,6 +117,14 @@ h1.frontroom {
 	color: white;
 }
 
+#character-selection > div.completed {
+	background-color: gold;
+}
+
+#character-selection > div.completed:hover {
+	box-shadow: gold;
+}
+
 /*********************************** Selected Character View ******************************************/
 
 #selection-view,

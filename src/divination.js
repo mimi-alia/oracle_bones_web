@@ -62,6 +62,8 @@ function createScriptDiv(characterObj){
         const characterInfo = Object.entries(characterObj)[obj][1];
 
         const imgDiv = document.createElement("div");
+
+
         //add a class set to its index for future targeting
         imgDiv.setAttribute("class", characterInfo.modernCharacter)
         imgDiv.setAttribute("data-id", characterInfo.modernCharacter)
@@ -122,6 +124,7 @@ selectionBackBtn.addEventListener("click", () => {
     setTimeout(returnToFrontroom, 2500);
 })
 
+
 function returnToFrontroom(){
     //make character selection view visible & make selected character view invisible
     setVisibility([frontroomContainer], [selectedCharacterView, defBtn, selectionBackBtn, detailBtn])
@@ -145,11 +148,27 @@ detailBackBtn.addEventListener("click", () => {
 })
 
 
+
 //Character select and draw div functions and variables
 
 let currentSelection = null;
 let completionHistory = new Set();
 
+//Div styling
+//character selection div styling based on completion 
+
+function setCompleteStyle(charDivs){
+
+    charDivs.forEach(div => {
+        const charKey = div.getAttribute("data-id");
+        if (completionHistory.has(charKey)){
+            div.setAttribute("class", "completed");
+        }
+    })
+}
+selectionBackBtn.addEventListener("click", () => {
+    setCompleteStyle(options)
+})
 
 //Character select div functionality
 

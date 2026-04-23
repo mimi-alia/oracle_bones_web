@@ -109,13 +109,11 @@ h1.frontroom {
 
 
 #character-selection > div > span {
-	visibility: hidden;
-	font-size: 20px;
+	font-size: 150px;
 
 }
 
 #character-selection > div:hover > span{
-	visibility: visible;
 	color: white;
 }
 

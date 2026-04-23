@@ -180,9 +180,6 @@ function selectCharacter(characterOption){
 }
 
 
-    function testOnce(){
-        console.log("trigger once")
-    }
 
 //Character draw div functionality
 

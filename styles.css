@@ -130,8 +130,43 @@ h1.frontroom {
 }
 
 
+/*********************************** Definitions View ******************************************/
+
 #definitions-view > div > table {
 	border: 2px solid black;
-	height: 100%;
-	width: 100%;
+	table-layout: auto;
+  	width: 90%;
+  	margin: 10px auto;
+}
+
+
+th,
+td {
+	vertical-align: top;
+  	padding: 0.6em;
+}
+th {
+	vertical-align: middle;
+	text-align:justify;
+	background-color: aliceblue;
+}
+
+tr {
+	text-align: left
+}
+
+td {
+	word-break: break-word;
+	overflow-wrap: break-word;
+}
+
+td:nth-child(5){
+  width: 25%;
+}
+
+
+
+li {
+	list-style: square;
+	padding: 5px;
 }

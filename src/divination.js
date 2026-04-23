@@ -280,8 +280,6 @@ function renderDefinitionsTable(characters){
     const entries  = Object.entries(characters);
     const tableElement = document.querySelector("table");
 
-    const tableElementChildren = tableElement.children;
-
     const tableHead = document.createElement("thead");
     const tableBody = document.createElement("tbody");
 
@@ -294,6 +292,7 @@ function renderDefinitionsTable(characters){
     while (tableElement.firstChild) {
         tableElement.removeChild(tableElement.firstChild);
     }
+
     headers.forEach(header => {
         const th = document.createElement("th");
         th.setAttribute("scope", "col")
@@ -303,17 +302,20 @@ function renderDefinitionsTable(characters){
 
     entries.forEach(entry => {
         entry = entry[1];
-
-        const bodyRow = document.createElement("tr");
         
-        for (let item in entry){
-            const cell = document.createElement("td");
-            cell.innerHTML = entry[item];
-            bodyRow.appendChild(cell);
-        }
+        //adds in order of character object, not completionHistory
+        if (completionHistory.has(entry.modernCharacter)){
+            const bodyRow = document.createElement("tr");
+        
+            for (let item in entry){
+                const cell = document.createElement("td");
+                cell.innerHTML = entry[item];
+                bodyRow.appendChild(cell);
+            }
 
-        bodyRowFragment.append(bodyRow);
-        tableBody.appendChild(bodyRow);
+            bodyRowFragment.append(bodyRow);
+            tableBody.appendChild(bodyRow);
+        }
 
     })
 

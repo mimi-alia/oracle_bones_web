@@ -308,9 +308,11 @@ function renderDefinitionsTable(characters){
             const bodyRow = document.createElement("tr");
         
             for (let item in entry){
-                const cell = document.createElement("td");
-                cell.innerHTML = entry[item];
-                bodyRow.appendChild(cell);
+                if(entry[item]){
+                   const cell = document.createElement("td");
+                    cell.innerHTML = entry[item];
+                    bodyRow.appendChild(cell); 
+                }
             }
 
             bodyRowFragment.append(bodyRow);

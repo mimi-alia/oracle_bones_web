@@ -374,11 +374,14 @@ function renderDefinitionsTable(characters){
 
 function checkAllCharsComplete(){
     let completionCount = 0;
+    let completionLog = [];
 
     for (let d=0; d<options.length; d++){
         options[d].classList.forEach(c => {
             if (c === "completed"){
+                console.log(completionCount)
                 completionCount++;
+                completionLog.push(options[d])
             }
         })
     }

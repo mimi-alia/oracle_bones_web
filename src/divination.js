@@ -383,9 +383,9 @@ function checkAllCharsComplete(){
         })
     }
     if (completionCount === 5){
+        selectionBackBtn.removeEventListener("click", checkAllCharsComplete)
         setTimeout(function(){alert("Congratulations, the divination is complete!");}, 3000)
-        removeEventListener("click", checkAllCharsComplete)
-    } else {
+    }else{
         console.log("There are still more divinations to be made. Continue?")
     }
 }

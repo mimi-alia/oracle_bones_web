@@ -128,10 +128,7 @@ selectionBackBtn.addEventListener("click", () => {
     setCompleteStyle(options)
 })
 
-selectionBackBtn.addEventListener("click", () => {
-    setTimeout(checkAllCharsComplete, 3000)
-})
-
+selectionBackBtn.addEventListener("click", checkAllCharsComplete)
 
 function returnToFrontroom(){
     //make character selection view visible & make selected character view invisible
@@ -386,7 +383,8 @@ function checkAllCharsComplete(){
         })
     }
     if (completionCount === 5){
-        alert("Congratulations, the divination is complete!")
+        setTimeout(function(){alert("Congratulations, the divination is complete!");}, 3000)
+        removeEventListener("click", checkAllCharsComplete)
     } else {
         console.log("There are still more divinations to be made. Continue?")
     }

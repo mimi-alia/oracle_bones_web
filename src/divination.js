@@ -37,7 +37,7 @@ const characters = {
         pinyin: "yòu",
         radicals: ["人 (rén) person", "右 (yòu)  right-hand side"],
         definition: "Blessing\; protection",
-        references: "http://jiaguwen.shufami.com/?char=%E4%BD%91&layout=1&size=128&hspace=0&vspace=0&forecolor=%23000000&backcolor=%23d7d5d0&order=",
+        references: ["http://jiaguwen.shufami.com/?char=%E4%BD%91&layout=1&size=128&hspace=0&vspace=0&forecolor=%23000000&backcolor=%23d7d5d0&order="],
         images: "",
         isSuccess: undefined,
     },
@@ -46,7 +46,7 @@ const characters = {
         pinyin: "bo",
         radicals: ["A radical that resembles the crack in the bone"],
         definition: "To divinate",
-        references: "http://jiaguwen.shufami.com/?char=%E5%8D%9C&layout=1&size=128&hspace=0&vspace=0&forecolor=%23000000&backcolor=%23d7d5d0&order=",
+        references: ["http://jiaguwen.shufami.com/?char=%E5%8D%9C&layout=1&size=128&hspace=0&vspace=0&forecolor=%23000000&backcolor=%23d7d5d0&order="],
         images: "",
         isSuccess: undefined,
     },
@@ -126,6 +126,10 @@ selectionBackBtn.addEventListener("click", () => {
 
 selectionBackBtn.addEventListener("click", () => {
     setCompleteStyle(options)
+})
+
+selectionBackBtn.addEventListener("click", () => {
+    setTimeout(checkAllCharsComplete, 3000)
 })
 
 
@@ -306,6 +310,7 @@ function renderDefinitionsTable(characters){
 
     const headers = ["Modern Character", "Pinyin", "Radicals", "Definition", "References"]
 
+    //Remove previous entries so they are not copied each load
     while (definitionsTable.firstChild) {
         definitionsTable.removeChild(definitionsTable.firstChild);
     }
@@ -368,3 +373,21 @@ function renderDefinitionsTable(characters){
     definitionsTable.appendChild(tableBody);
 }
 
+//Completion function -- checks if all 5 charachter drawings have been completed;
+
+function checkAllCharsComplete(){
+    let completionCount = 0;
+
+    for (let d=0; d<options.length; d++){
+        options[d].classList.forEach(c => {
+            if (c === "completed"){
+                completionCount++;
+            }
+        })
+    }
+    if (completionCount === 5){
+        alert("Congratulations, the divination is complete!")
+    } else {
+        console.log("There are still more divinations to be made. Continue?")
+    }
+}

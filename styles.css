@@ -110,7 +110,8 @@ h1.frontroom {
 
 #character-selection > div > span {
 	font-size: 150px;
-
+	vertical-align: middle;
+	text-align: center;
 }
 
 #character-selection > div:hover > span{

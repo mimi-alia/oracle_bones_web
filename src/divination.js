@@ -124,6 +124,10 @@ selectionBackBtn.addEventListener("click", () => {
     setTimeout(returnToFrontroom, 2500);
 })
 
+selectionBackBtn.addEventListener("click", () => {
+    setCompleteStyle(options)
+})
+
 
 function returnToFrontroom(){
     //make character selection view visible & make selected character view invisible
@@ -162,13 +166,11 @@ function setCompleteStyle(charDivs){
     charDivs.forEach(div => {
         const charKey = div.getAttribute("data-id");
         if (completionHistory.has(charKey)){
-            div.setAttribute("class", "completed");
+            div.setAttribute("class", `${charKey} completed`);
         }
     })
 }
-selectionBackBtn.addEventListener("click", () => {
-    setCompleteStyle(options)
-})
+
 
 //Character select div functionality
 

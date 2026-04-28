@@ -137,6 +137,15 @@ h1.frontroom {
 }
 
 
+/*********************************** Character Draw View ******************************************/
+
+
+#character-draw {
+	max-width: 50%;
+	position: relative;
+	left: 300px;
+}
+
 /*********************************** Definitions View ******************************************/
 
 #definitions-view > div > table {

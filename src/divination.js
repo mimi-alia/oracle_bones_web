@@ -186,7 +186,7 @@ function generateCharacterDrawDivData(characterOption){
     const charDataID = characterOption.dataset.id;
     
     selectedCharacterDrawSpace.setAttribute("data-id", charDataID);
-    selectedCharacterReference.setAttribute("data-id", charDataID);
+    // selectedCharacterReference.setAttribute("data-id", charDataID);
 }
 
 function selectCharacter(characterOption){
@@ -197,7 +197,7 @@ function selectCharacter(characterOption){
     generateCharacterDrawDivData(characterOption);
 
     //add details from the currentSelection to the selectedCharacterReference
-    selectedCharacterReference.innerHTML = characterOption.getAttribute("class");
+    selectedCharacterDrawSpace.innerHTML = characterOption.getAttribute("class");
 
 }
 
@@ -373,7 +373,7 @@ function renderDefinitionsTable(characters){
 //Completion function -- checks if all 5 charachter drawings have been completed;
 
 function checkAllCharsComplete(){
-    let completionCount = 0;
+    let completionCount = 0; 
     for (let d=0; d<options.length; d++){
         options[d].classList.forEach(c => {
             if (c === "completed"){

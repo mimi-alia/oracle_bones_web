@@ -159,7 +159,9 @@ detailBackBtn.addEventListener("click", () => {
 let currentSelection = null;
 let completionHistory = new Set();
 
-const clickSound = new Audio("../assets/audio/soundfx/oracle_click.mp3")
+const clickSound = new Audio("../assets/audio/soundfx/oracle_click.mp3");
+const charCompleteSound = new Audio("../assets/audio/soundfx/oracle_failure.mp3");
+const gameCompleteSound = new Audio("../assets/audio/soundfx/oracle_success_hit.mp3");
 
 document.addEventListener("click", () => {
     clickSound.currentTime = 0;
@@ -228,6 +230,8 @@ function isSuccess(el){
 }
 
 function showSuccess(){
+    charCompleteSound.currentTime = 0;
+    charCompleteSound.play();
     alert("Divination complete! Explore further?");
     setVisibility([defBtn, selectionBackBtn, detailBtn]);
 }
@@ -389,7 +393,8 @@ function checkAllCharsComplete(){
         })
     }
     if (completionCount === 5){
-        selectionBackBtn.removeEventListener("click", checkAllCharsComplete)
+        selectionBackBtn.removeEventListener("click", checkAllCharsComplete);
+        setTimeout(function(){gameCompleteSound.play()}, 3000);
         setTimeout(function(){alert("Congratulations, the divination is complete!");}, 3000)
     }else{
         console.log("There are still more divinations to be made. Continue?")

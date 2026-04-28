@@ -159,6 +159,13 @@ detailBackBtn.addEventListener("click", () => {
 let currentSelection = null;
 let completionHistory = new Set();
 
+const clickSound = new Audio("../assets/audio/soundfx/oracle_click.mp3")
+
+document.addEventListener("click", () => {
+    clickSound.currentTime = 0;
+    clickSound.play();
+});
+
 //Div styling
 //character selection div styling based on completion 
 

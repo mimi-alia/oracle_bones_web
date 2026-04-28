@@ -48,6 +48,7 @@ table {
 }
 
 :root {
+	background-color: black;
 }
 
 .horizontal-layout {
@@ -89,6 +90,8 @@ table {
   padding: 20px;
 }
 
+
+
 #startBtn {
 	position: relative;
 	z-index: 2;
@@ -112,7 +115,9 @@ h1.frontroom {
 	font-size: 20px;
 }
 
-
+div {
+	background-color:burlywood;
+}
 
 #character-selection > div:hover {
 	background-color: red;

@@ -398,6 +398,7 @@ function renderDefinitionsTable(characters){
                     entry.references.forEach(reference => {
                         const listItem = document.createElement("li");
                         const anchor = document.createElement("a");
+                        anchor.setAttribute("target", "_blank")
 
                         anchor.innerHTML = reference;
                         anchor.setAttribute("href", reference)

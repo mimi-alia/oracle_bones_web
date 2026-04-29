@@ -100,6 +100,14 @@ table {
 }
 
 /*********************************** Frontroom Page ******************************************/
+#intro-div {
+	position: relative;
+	left: 50%;
+	top: 100x;
+	width: 200px;
+	height: 400px;
+}
+
 
 .frontroom.container {
 	display: flex;

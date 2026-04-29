@@ -199,6 +199,8 @@ function selectCharacter(characterOption){
     //add details from the currentSelection to the selectedCharacterReference
     selectedCharacterDrawSpace.innerHTML = characterOption.getAttribute("class");
 
+    resetCanvas(characterOption.dataset.id); 
+
 }
 
 
@@ -236,11 +238,15 @@ function setDrawSpaceEventListener(status){
 }
 
 function checkSuccess(el){
+    if (!evaluateDrawing()) return;
     const successStatus = isSuccess(el);
     if (successStatus){
         showSuccess();
     }
     setDrawSpaceEventListener(successStatus);
+    console.log("checkSuccess called");
+    console.log("evaluateDrawing result:", evaluateDrawing());
+    
 }
 
 
@@ -388,3 +394,5 @@ function checkAllCharsComplete(){
         console.log("There are still more divinations to be made. Continue?")
     }
 }
+
+initCanvas();

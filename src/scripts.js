@@ -25,3 +25,14 @@ homepage.addEventListener("click", function(){
 
     // setTimeout(function(){ window.location.href = "./rooms/frontroom.html"}, 5000)
 })
+
+const audioToPlay = document.querySelector("#audioFile");
+const startBtn = document.querySelector("#startBtn");
+
+startBtn.addEventListener("click", () => {
+    if (window.confirm("Begin?")) {
+        audioToPlay.play();
+        startBtn.remove()
+        homepage.style.visibility = "visible"
+    }
+});

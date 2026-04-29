@@ -48,6 +48,7 @@ table {
 }
 
 :root {
+	background-color: black;
 }
 
 .horizontal-layout {
@@ -66,10 +67,15 @@ table {
 
 /************************************ Home Page *********************************************/
 
-/* Video */
+#home {
+	visibility: hidden;
+}
+
+
 #home video {
   position: fixed;
   right: 0;
+  z-index: 0;
   bottom: 0;
   min-width: 100%;
   min-height: 100%;
@@ -84,7 +90,24 @@ table {
   padding: 20px;
 }
 
+
+
+#startBtn {
+	position: relative;
+	z-index: 2;
+	width: 100px;
+	height: 40px;
+}
+
 /*********************************** Frontroom Page ******************************************/
+#intro-div {
+	position: relative;
+	left: 50%;
+	top: 100x;
+	width: 200px;
+	height: 400px;
+}
+
 
 .frontroom.container {
 	display: flex;
@@ -100,7 +123,9 @@ h1.frontroom {
 	font-size: 20px;
 }
 
-
+div {
+	background-color:burlywood;
+}
 
 #character-selection > div:hover {
 	background-color: red;

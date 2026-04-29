@@ -87,9 +87,56 @@ function createScriptDiv(characterObj){
 
     //append fragment to main section
     characterSelectionSection.appendChild(imagesFragment);
+    frontroomContainer.style.visibility = "hidden"
 }
-
 createScriptDiv(characters);
+
+// createScriptDiv(characters);
+
+const backgroundAudio = new Audio("../assets/audio/finals/fa_415.wav");
+
+const loopStart = 43;
+const loopEnd = 62;
+
+
+
+backgroundAudio.addEventListener("timeupdate", () => {
+    if (backgroundAudio.currentTime >= loopEnd) {
+        backgroundAudio.currentTime = loopStart;
+        backgroundAudio.play();
+    }
+});
+
+
+function initializeExperience(){
+    const introDiv = document.createElement("div")
+    introDiv.setAttribute("id", "intro-div");
+
+    const introTitle = document.createElement("h1");
+    const introText = document.createElement("p");
+    const introButton = document.createElement("button");
+
+    introTitle.innerText = "About The Oracle Bones Demo"
+    introText.innerText = "Some stuff history whatever background about oracle bones and their use and why this game was made and what this game is for ahhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh"
+    introButton.innerText = "Continue";
+
+    
+
+    [introTitle, introText, introButton].forEach( el => {
+        introDiv.appendChild(el);
+    })
+
+    document.body.appendChild(introDiv);
+
+    introButton.addEventListener("click", () => {
+        backgroundAudio.currentTime = 43;
+        backgroundAudio.play();
+        introDiv.remove();
+        frontroomContainer.style.visibility = "visible";
+        
+    })
+}
+initializeExperience();
 
 
 //Functions that handle character selection storage and visualization
@@ -159,6 +206,15 @@ detailBackBtn.addEventListener("click", () => {
 let currentSelection = null;
 let completionHistory = new Set();
 
+const clickSound = new Audio("../assets/audio/soundfx/oracle_click.mp3");
+const charCompleteSound = new Audio("../assets/audio/soundfx/oracle_failure.mp3");
+const gameCompleteSound = new Audio("../assets/audio/soundfx/oracle_success_hit.mp3");
+
+document.addEventListener("click", () => {
+    clickSound.currentTime = 0;
+    clickSound.play();
+});
+
 //Div styling
 //character selection div styling based on completion 
 
@@ -223,6 +279,8 @@ function isSuccess(el){
 }
 
 function showSuccess(){
+    charCompleteSound.currentTime = 0;
+    charCompleteSound.play();
     alert("Divination complete! Explore further?");
     setVisibility([defBtn, selectionBackBtn, detailBtn]);
 }
@@ -346,6 +404,7 @@ function renderDefinitionsTable(characters){
                     entry.references.forEach(reference => {
                         const listItem = document.createElement("li");
                         const anchor = document.createElement("a");
+                        anchor.setAttribute("target", "_blank")
 
                         anchor.innerHTML = reference;
                         anchor.setAttribute("href", reference)
@@ -388,7 +447,8 @@ function checkAllCharsComplete(){
         })
     }
     if (completionCount === 5){
-        selectionBackBtn.removeEventListener("click", checkAllCharsComplete)
+        selectionBackBtn.removeEventListener("click", checkAllCharsComplete);
+        setTimeout(function(){gameCompleteSound.play()}, 3000);
         setTimeout(function(){alert("Congratulations, the divination is complete!");}, 3000)
     }else{
         console.log("There are still more divinations to be made. Continue?")
@@ -396,3 +456,4 @@ function checkAllCharsComplete(){
 }
 
 initCanvas();
+

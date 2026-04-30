@@ -12,10 +12,10 @@ const REFERENCE_IMAGES = {
     "卜": "../assets/media/卜_type.skyfont.com.png",
 };
  
-const SIMILARITY_THRESHOLD = 0.6;
+const SIMILARITY_THRESHOLD = 0.55;
 const GUIDE_OPACITY        = 0.15;
 const STROKE_COLOR         = "#1a1a1a";
-const STROKE_WIDTH         = 6;
+const STROKE_WIDTH         = 12;
  
 let canvas, ctx;
 let offscreenCanvas, offscreenCtx;
@@ -30,8 +30,8 @@ let currentChar = null;
 function initCanvas() {
     // Create the offscreen canvas once — it persists for the lifetime of the page
     offscreenCanvas        = document.createElement("canvas");
-    offscreenCanvas.width  = 300;
-    offscreenCanvas.height = 300;
+    offscreenCanvas.width  = 400;
+    offscreenCanvas.height = 500;
     offscreenCtx           = offscreenCanvas.getContext("2d");
     }
  
@@ -39,8 +39,8 @@ function initCanvas() {
 function resetCanvas(char) {
     // Re-query every time because innerHTML destroys and recreates the element
     canvas        = document.getElementById("character-draw");
-    canvas.width  = canvas.offsetWidth  || 300;
-    canvas.height = canvas.offsetHeight || 300;
+    canvas.width  = canvas.offsetWidth  || 400;
+    canvas.height = canvas.offsetHeight || 500;
     ctx           = canvas.getContext("2d");
  
     offscreenCanvas.width  = canvas.width;

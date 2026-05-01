@@ -208,14 +208,31 @@ function stopAudio(key){
     console.log("AUDIO STOPPED");
 }
 
-const clickSound = new Audio("../assets/audio/soundfx/oracle_click.mp3");
-const charCompleteSound = new Audio("../assets/audio/soundfx/oracle_failure.mp3");
-const gameCompleteSound = new Audio("../assets/audio/soundfx/oracle_success_hit.mp3");
+const audioToAdd = {
+    "clickSound": "../assets/audio/soundfx/oracle_click.mp3",
+    "charCompleteSound" : "../assets/audio/soundfx/oracle_failure.mp3",
+    "gameCompleteSound": "../assets/audio/soundfx/oracle_success_hit.mp3",
+    "carveSound": "../assets/audio/soundfx/oracle_long_carve.mp3"
+}
+
+for (let k in audioToAdd){
+    createAudioFiles(k, audioToAdd[k]);
+} 
+
+Object.values(characters).forEach(char => {
+    createAudioFiles(char.modernCharacter, char.bckgrndAudio)
+})
+
+// const clickSound = new Audio("../assets/audio/soundfx/oracle_click.mp3");
+// const charCompleteSound = new Audio("../assets/audio/soundfx/oracle_failure.mp3");
+// const gameCompleteSound = new Audio("../assets/audio/soundfx/oracle_success_hit.mp3");
 
 document.addEventListener("click", () => {
     clickSound.currentTime = 0;
     clickSound.play();
 });
+
+
 
 
 //Button functionality

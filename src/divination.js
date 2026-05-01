@@ -10,6 +10,7 @@ const characters = {
         text:"",
         references: ["http://jiaguwen.shufami.com/?char=%E5%A6%87&la", "yout=1&size=128&hspace=0&vspace=0&forecolor=%23000000&backcolor=%23d7d5d0&order="],
         images: "",
+        bckgrndAudio : "../assets/audio/finals/fuhao.mp3",
         isSuccess: undefined,
     },
     好 : {
@@ -20,6 +21,7 @@ const characters = {
         text: "",
         references: ["http://jiaguwen.shufami.com/?char=%E5%A6%87&la", "http://jiaguwen.shufami.com/?char=%E5%"],
         images: "",
+        bckgrndAudio : "../assets/audio/finals/fuhao.mp3",
         isSuccess: undefined,
     },
     伐 : {
@@ -30,6 +32,7 @@ const characters = {
         text: "",
         references: ["http://jiaguwen.shufami.com/?char=%E4%BC%90&layout=1&size=128&hspace=0&vspace=0&forecolor=%23000000&backcolor=%23d7d5d0&order="],
         images: "",
+        bckgrndAudio : "../assets/audio/finals/fa_415.wav",
         isSuccess: undefined,
     },
     佑 : {
@@ -39,6 +42,7 @@ const characters = {
         definition: "Blessing\; protection",
         references: ["http://jiaguwen.shufami.com/?char=%E4%BD%91&layout=1&size=128&hspace=0&vspace=0&forecolor=%23000000&backcolor=%23d7d5d0&order="],
         images: "",
+        bckgrndAudio : "../assets/audio/finals/blessed_426.mp3",
         isSuccess: undefined,
     },
     卜: {
@@ -48,10 +52,14 @@ const characters = {
         definition: "To divinate",
         references: ["http://jiaguwen.shufami.com/?char=%E5%8D%9C&layout=1&size=128&hspace=0&vspace=0&forecolor=%23000000&backcolor=%23d7d5d0&order="],
         images: "",
+        bckgrndAudio : "../assets/audio/finals/divinate.mp3",
         isSuccess: undefined,
     },
     }
 
+/********************************************************
+ * UI 
+ ********************************************************/
 
 //Function that initializes character selection divs
 function createScriptDiv(characterObj){
@@ -164,6 +172,51 @@ const detailsView = document.querySelector("#detail-view");
 const detailBackBtn = document.querySelector("#detail-back");
 
 
+/********************************************************
+ * Audio 
+ ********************************************************/
+
+const AUDIO = {};
+
+function createAudioFiles(key, src){
+    AUDIO[key] = new Audio(src);
+}
+
+function handleAudioSwitches(option, key, params = {}){
+    if (option === "play") {
+        playAudio(key, params);
+    } else if (option === "stop") {
+        stopAudio(key);
+    }
+}
+
+function playAudio(key, params = {}){
+   const audio = AUDIOA[key]
+
+   Object.entries(params).forEach((k,v) => {
+        audio[k] = v;
+   });
+
+   audio.play();
+   console.log("AUDIO PLAY");
+}
+
+
+function stopAudio(key){
+    const audio = AUDIO[KEY];
+    audio.stop();
+    console.log("AUDIO STOPPED");
+}
+
+const clickSound = new Audio("../assets/audio/soundfx/oracle_click.mp3");
+const charCompleteSound = new Audio("../assets/audio/soundfx/oracle_failure.mp3");
+const gameCompleteSound = new Audio("../assets/audio/soundfx/oracle_success_hit.mp3");
+
+document.addEventListener("click", () => {
+    clickSound.currentTime = 0;
+    clickSound.play();
+});
+
 
 //Button functionality
 
@@ -205,15 +258,6 @@ detailBackBtn.addEventListener("click", () => {
 
 let currentSelection = null;
 let completionHistory = new Set();
-
-const clickSound = new Audio("../assets/audio/soundfx/oracle_click.mp3");
-const charCompleteSound = new Audio("../assets/audio/soundfx/oracle_failure.mp3");
-const gameCompleteSound = new Audio("../assets/audio/soundfx/oracle_success_hit.mp3");
-
-document.addEventListener("click", () => {
-    clickSound.currentTime = 0;
-    clickSound.play();
-});
 
 //Div styling
 //character selection div styling based on completion 

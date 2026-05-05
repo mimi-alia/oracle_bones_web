@@ -1,8 +1,31 @@
-const homepage = document.querySelector("#home")
+const homepage = document.querySelector("#home");
 
-function playAnimation(animation){
+const backgroundVid = document.createElement("video");
+backgroundVid.setAttribute("src", "../assets/media/camera_swap.mp4");
+backgroundVid.autoplay = true;
+backgroundVid.controls = false;
+backgroundVid.muted = true;
+backgroundVid.playsInline = true;
 
+homepage.appendChild(backgroundVid);
+
+
+
+backgroundVid.addEventListener("timeupdate", () => {
+    if (backgroundVid.currentTime >= loopEnd) {
+        backgroundVid.currentTime = loopStart;
+    }
+});
+
+
+function playSegment(start, end) {
+    loopStart = start;
+    loopEnd = end;
+
+    backgroundVid.currentTime = start;
+    backgroundVid.play();
 }
+
 
 function changeRoom(link){
     window.location.href = link;
@@ -10,27 +33,26 @@ function changeRoom(link){
 
  function changeSRC(e, src){
     e.src = `${src}`;
-    console.log("success")
+    console.log("success");
 }
 
-homepage.addEventListener("click", function(){
-    const homepageVideo = document.querySelector("#home > video");
-    //background animation will switch to an animation emulating a change
-    changeSRC(homepageVideo, "#");
-    //Create a room change for switching from landing to divination space with a delay of 2.5 secs
-    function enterDivinationSpace(){
-        changeRoom("../enter/divination.html");
-    }
-    setTimeout(enterDivinationSpace, 2500);
 
-    // setTimeout(function(){ window.location.href = "./rooms/frontroom.html"}, 5000)
-})
 
 const audioToPlay = document.querySelector("#audioFile");
 const startBtn = document.querySelector("#startBtn");
 
 startBtn.addEventListener("click", () => {
         audioToPlay.play();
-        startBtn.remove()
-        homepage.style.visibility = "visible"
+        startBtn.remove();
+        homepage.style.visibility = "visible";
+
+        playSegment(0.5, 4.5);
+});
+
+homepage.addEventListener("click", function(){
+    playSegment(4.5, 8);
+
+    setTimeout(() => {
+        changeRoom("../enter/divination.html");
+    }, 2500);
 });

@@ -163,6 +163,9 @@ initializeExperience();
 
 //Functions that handle character selection storage and visualization
 
+//Intro div
+const introBtn = document.querySelector("#intro-div>button");
+
 const options = document.querySelectorAll("section#character-selection>div"); //Every character option in the character selection section
 
 //Selected Character View Elements
@@ -283,6 +286,15 @@ Object.values(characters).forEach(char => {
     createAudioFiles(char.modernCharacter, char.bckgrndAudio)
 })
 
+//background
+
+introBtn.addEventListener("click", () => {
+    AUDIO.backgroundAudio.currentTime = 0;
+    AUDIO.backgroundAudio.loop = true;
+    AUDIO.backgroundAudio.play();
+})
+
+//Interaction Sound fx
 document.addEventListener("click", (e) => {
     if (e.target !== selectedCharacterDrawSpace){
         AUDIO.clickSound.currentTime = 0;
@@ -326,6 +338,8 @@ selectedCharacterDrawSpace.addEventListener("mousemove", () => {
         AUDIO.carveSound.currentTime = 0;
     }, 200); 
 });
+
+
 
 //Character select and draw div functions and variables
 

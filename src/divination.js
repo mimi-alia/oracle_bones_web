@@ -133,15 +133,6 @@ function initializeExperience(){
     })
 
     document.body.appendChild(introDiv);
-
-    // introButton.addEventListener("click", () => {
-    // handleAudioSwitches("play", "伐", {
-    //     loop: true,
-    //     currentTime : 43,
-    //     volume: 0.5,
-    //     startTime: 43
-    //     });
-    // });
     
 
     introButton.addEventListener("click", () => {
@@ -150,15 +141,6 @@ function initializeExperience(){
     })
 }
 initializeExperience();
-
-
-//Audio event listeners
-
-// document.addEventListener("click", () => {
-//     handleAudioSwitches("play", "clickSound", {
-//         currentTime: 0
-//     })
-// });
 
 
 //Functions that handle character selection storage and visualization
@@ -240,13 +222,15 @@ function createAudioFiles(key, src, params = {}){
    });
 }
 
+let currentBG = null;
 
-function handleAudioSwitches(option, key, params = {}){
-    if (option === "play") {
-        playAudio(key, params);
-    } else if (option === "stop") {
-        stopAudio(key);
+function handleAudioSwitches(key, params = {}) {
+    if (currentBG && currentBG !== key) {
+        stopAudio(currentBG);
     }
+
+    currentBG = key;
+    playAudio(key, params);
 }
 
 function playAudio(key, params = {}){
@@ -260,12 +244,19 @@ function playAudio(key, params = {}){
    console.log("AUDIO PLAY");
 }
 
-
 function stopAudio(key){
     const audio = AUDIO[key];
+    if (!audio) return;
+
     audio.pause();
     audio.currentTime = 0;
-    console.log("AUDIO STOPPED");
+}
+
+function stopAllAudio() {
+    Object.values(AUDIO).forEach(audio => {
+        audio.pause();
+        audio.currentTime = 0;
+    });
 }
 
 const audioToAdd = {
@@ -293,6 +284,24 @@ introBtn.addEventListener("click", () => {
     AUDIO.backgroundAudio.loop = true;
     AUDIO.backgroundAudio.play();
 })
+
+selectionBackBtn.addEventListener("click", () => {
+    if (currentBG && AUDIO[currentBG]) {
+        stopAudio(currentBG);
+        currentBG = null;
+    }
+});
+
+options.forEach(option => option.addEventListener("click", () => {
+    const charKey = option.dataset.id;
+
+    handleAudioSwitches(charKey, {
+    loop: true,
+    currentTime: 0,
+    volume: 0.5
+});
+}
+))
 
 //Interaction Sound fx
 document.addEventListener("click", (e) => {
@@ -339,6 +348,39 @@ selectedCharacterDrawSpace.addEventListener("mousemove", () => {
     }, 200); 
 });
 
+/********************************************************
+ * Background Video 
+ ********************************************************/
+
+const backgroundVid = document.createElement("video");
+backgroundVid.setAttribute("src", "../assets/media/camera_swap.mp4");
+backgroundVid.autoplay = true;
+backgroundVid.controls = false;
+backgroundVid.muted = true;
+backgroundVid.playsInline = true;
+
+frontroomContainer.appendChild(backgroundVid);
+
+introBtn.addEventListener("click", () => {
+    playSegment(0.5, 4.5)
+})
+
+loopStart = 0;
+loopEnd = 0;
+backgroundVid.addEventListener("timeupdate", () => {
+    if (backgroundVid.currentTime >= loopEnd) {
+        backgroundVid.currentTime = loopStart;
+    }
+});
+
+
+function playSegment(start, end) {
+    loopStart = start;
+    loopEnd = end;
+
+    backgroundVid.currentTime = start;
+    backgroundVid.play();
+}
 
 
 //Character select and draw div functions and variables

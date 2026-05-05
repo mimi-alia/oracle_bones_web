@@ -9,6 +9,8 @@ backgroundVid.playsInline = true;
 
 homepage.appendChild(backgroundVid);
 
+loopStart = 0;
+loopEnd = 0;
 
 
 backgroundVid.addEventListener("timeupdate", () => {

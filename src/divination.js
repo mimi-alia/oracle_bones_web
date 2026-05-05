@@ -58,66 +58,6 @@ const characters = {
     }
 
 /********************************************************
- * Audio 
- ********************************************************/
-
-const AUDIO = {};
-
-function createAudioFiles(key, src, params = {}){
-    AUDIO[key] = new Audio(src);
-
-    const audio = AUDIO[key];
-    Object.entries(params).forEach((k,v) => {
-        audio[k] = v;
-        console.log("Audio parameter added: " + v)
-   });
-}
-
-
-function handleAudioSwitches(option, key, params = {}){
-    if (option === "play") {
-        playAudio(key, params);
-    } else if (option === "stop") {
-        stopAudio(key);
-    }
-}
-
-function playAudio(key, params = {}){
-   const audio = AUDIO[key];
-   Object.entries(params).forEach((k,v) => {
-        audio[k] = v;
-        console.log("Audio parameter added: " + audio[k])
-   });
-
-   audio.play();
-   console.log("AUDIO PLAY");
-}
-
-
-function stopAudio(key){
-    const audio = AUDIO[KEY];
-    audio.stop();
-    console.log("AUDIO STOPPED");
-}
-
-const audioToAdd = {
-    "clickSound": "../assets/audio/soundfx/oracle_click.mp3",
-    "charCompleteSound" : "../assets/audio/soundfx/oracle_failure.mp3",
-    "gameCompleteSound": "../assets/audio/soundfx/oracle_success_hit.mp3",
-    "carveSound": "../assets/audio/soundfx/oracle_long_carve.mp3"
-}
-
-/************** Create/Add Audio files to AUDIO Obj ******* */
-
-for (let k in audioToAdd){
-    createAudioFiles(k, audioToAdd[k]);
-} 
-
-Object.values(characters).forEach(char => {
-    createAudioFiles(char.modernCharacter, char.bckgrndAudio)
-})
-
-/********************************************************
  * UI 
  ********************************************************/
 
@@ -247,18 +187,6 @@ const detailBackBtn = document.querySelector("#detail-back");
 
 
 
-
-document.addEventListener("click", () => {
-    AUDIO.clickSound.currentTime = 0;
-    AUDIO.clickSound.play();
-});
-
-
-
-/************** Handle Clicks ******* */
-
-
-
 //Button functionality
 
 selectionBackBtn.addEventListener("click", () => {
@@ -293,7 +221,111 @@ detailBackBtn.addEventListener("click", () => {
     setVisibility([selectedCharacterView], [detailsView]);
 })
 
+/********************************************************
+ * Audio 
+ ********************************************************/
 
+const AUDIO = {};
+
+function createAudioFiles(key, src, params = {}){
+    AUDIO[key] = new Audio(src);
+
+    const audio = AUDIO[key];
+    Object.entries(params).forEach(([k, v]) => {
+        audio[k] = v;
+        console.log("Audio parameter added: " + v)
+   });
+}
+
+
+function handleAudioSwitches(option, key, params = {}){
+    if (option === "play") {
+        playAudio(key, params);
+    } else if (option === "stop") {
+        stopAudio(key);
+    }
+}
+
+function playAudio(key, params = {}){
+   const audio = AUDIO[key];
+   Object.entries(params).forEach(([k, v]) => {
+        audio[k] = v;
+        console.log("Audio parameter added: " + audio[k])
+   });
+
+   audio.play();
+   console.log("AUDIO PLAY");
+}
+
+
+function stopAudio(key){
+    const audio = AUDIO[key];
+    audio.pause();
+    audio.currentTime = 0;
+    console.log("AUDIO STOPPED");
+}
+
+const audioToAdd = {
+    "clickSound": "../assets/audio/soundfx/oracle_click.mp3",
+    "charCompleteSound" : "../assets/audio/soundfx/oracle_failure.mp3",
+    "gameCompleteSound": "../assets/audio/soundfx/oracle_success_hit.mp3",
+    "carveSound": "../assets/audio/soundfx/oracle_long_carve.mp3",
+    "backgroundAudio": "../assets/audio/fireplace.wav"
+}
+
+/************** Create/Add Audio files to AUDIO Obj ******* */
+
+for (let k in audioToAdd){
+    createAudioFiles(k, audioToAdd[k]);
+} 
+
+Object.values(characters).forEach(char => {
+    createAudioFiles(char.modernCharacter, char.bckgrndAudio)
+})
+
+document.addEventListener("click", (e) => {
+    if (e.target !== selectedCharacterDrawSpace){
+        AUDIO.clickSound.currentTime = 0;
+        AUDIO.clickSound.play();
+    } 
+});
+
+let isMoving = false;
+let moveTimeout;
+
+selectedCharacterDrawSpace.addEventListener("mousedown", () => {
+    isDrawing = true;
+});
+
+document.addEventListener("mouseup", () => {
+    isDrawing = false;
+    isMoving = false;
+
+    AUDIO.carveSound.pause();
+    AUDIO.carveSound.currentTime = 0;
+});
+
+selectedCharacterDrawSpace.addEventListener("mousemove", () => {
+    if (!isDrawing) return;
+
+    isMoving = true;
+
+    // start playing if not already
+    if (AUDIO.carveSound.paused) {
+        AUDIO.carveSound.loop = true;
+        AUDIO.carveSound.volume = 0.75;
+        AUDIO.carveSound.play();
+    }
+
+    // detect when movement stops
+    clearTimeout(moveTimeout);
+    moveTimeout = setTimeout(() => {
+        isMoving = false;
+
+        AUDIO.carveSound.pause();
+        AUDIO.carveSound.currentTime = 0;
+    }, 200); 
+});
 
 //Character select and draw div functions and variables
 
@@ -533,7 +565,7 @@ function checkAllCharsComplete(){
     }
     if (completionCount === 5){
         selectionBackBtn.removeEventListener("click", checkAllCharsComplete);
-        setTimeout(function(){gameCompleteSound.play()}, 3000);
+        setTimeout(function(){AUDIO.gameCompleteSound.play()}, 3000);
         setTimeout(function(){alert("Congratulations, the divination is complete!");}, 3000)
     }else{
         console.log("There are still more divinations to be made. Continue?")

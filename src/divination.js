@@ -58,6 +58,66 @@ const characters = {
     }
 
 /********************************************************
+ * Audio 
+ ********************************************************/
+
+const AUDIO = {};
+
+function createAudioFiles(key, src, params = {}){
+    AUDIO[key] = new Audio(src);
+
+    const audio = AUDIO[key];
+    Object.entries(params).forEach((k,v) => {
+        audio[k] = v;
+        console.log("Audio parameter added: " + v)
+   });
+}
+
+
+function handleAudioSwitches(option, key, params = {}){
+    if (option === "play") {
+        playAudio(key, params);
+    } else if (option === "stop") {
+        stopAudio(key);
+    }
+}
+
+function playAudio(key, params = {}){
+   const audio = AUDIO[key];
+   Object.entries(params).forEach((k,v) => {
+        audio[k] = v;
+        console.log("Audio parameter added: " + audio[k])
+   });
+
+   audio.play();
+   console.log("AUDIO PLAY");
+}
+
+
+function stopAudio(key){
+    const audio = AUDIO[KEY];
+    audio.stop();
+    console.log("AUDIO STOPPED");
+}
+
+const audioToAdd = {
+    "clickSound": "../assets/audio/soundfx/oracle_click.mp3",
+    "charCompleteSound" : "../assets/audio/soundfx/oracle_failure.mp3",
+    "gameCompleteSound": "../assets/audio/soundfx/oracle_success_hit.mp3",
+    "carveSound": "../assets/audio/soundfx/oracle_long_carve.mp3"
+}
+
+/************** Create/Add Audio files to AUDIO Obj ******* */
+
+for (let k in audioToAdd){
+    createAudioFiles(k, audioToAdd[k]);
+} 
+
+Object.values(characters).forEach(char => {
+    createAudioFiles(char.modernCharacter, char.bckgrndAudio)
+})
+
+/********************************************************
  * UI 
  ********************************************************/
 
@@ -99,21 +159,19 @@ function createScriptDiv(characterObj){
 }
 createScriptDiv(characters);
 
-// createScriptDiv(characters);
+// const backgroundAudio = new Audio("../assets/audio/finals/fa_415.wav");
 
-const backgroundAudio = new Audio("../assets/audio/finals/fa_415.wav");
-
-const loopStart = 43;
-const loopEnd = 62;
+// const loopStart = 43;
+// const loopEnd = 62;
 
 
 
-backgroundAudio.addEventListener("timeupdate", () => {
-    if (backgroundAudio.currentTime >= loopEnd) {
-        backgroundAudio.currentTime = loopStart;
-        backgroundAudio.play();
-    }
-});
+// backgroundAudio.addEventListener("timeupdate", () => {
+//     if (backgroundAudio.currentTime >= loopEnd) {
+//         backgroundAudio.currentTime = loopStart;
+//         backgroundAudio.play();
+//     }
+// });
 
 
 function initializeExperience(){
@@ -136,15 +194,31 @@ function initializeExperience(){
 
     document.body.appendChild(introDiv);
 
+    // introButton.addEventListener("click", () => {
+    // handleAudioSwitches("play", "伐", {
+    //     loop: true,
+    //     currentTime : 43,
+    //     volume: 0.5,
+    //     startTime: 43
+    //     });
+    // });
+    
+
     introButton.addEventListener("click", () => {
-        backgroundAudio.currentTime = 43;
-        backgroundAudio.play();
         introDiv.remove();
         frontroomContainer.style.visibility = "visible";
-        
     })
 }
 initializeExperience();
+
+
+//Audio event listeners
+
+// document.addEventListener("click", () => {
+//     handleAudioSwitches("play", "clickSound", {
+//         currentTime: 0
+//     })
+// });
 
 
 //Functions that handle character selection storage and visualization
@@ -172,66 +246,16 @@ const detailsView = document.querySelector("#detail-view");
 const detailBackBtn = document.querySelector("#detail-back");
 
 
-/********************************************************
- * Audio 
- ********************************************************/
 
-const AUDIO = {};
-
-function createAudioFiles(key, src){
-    AUDIO[key] = new Audio(src);
-}
-
-function handleAudioSwitches(option, key, params = {}){
-    if (option === "play") {
-        playAudio(key, params);
-    } else if (option === "stop") {
-        stopAudio(key);
-    }
-}
-
-function playAudio(key, params = {}){
-   const audio = AUDIOA[key]
-
-   Object.entries(params).forEach((k,v) => {
-        audio[k] = v;
-   });
-
-   audio.play();
-   console.log("AUDIO PLAY");
-}
-
-
-function stopAudio(key){
-    const audio = AUDIO[KEY];
-    audio.stop();
-    console.log("AUDIO STOPPED");
-}
-
-const audioToAdd = {
-    "clickSound": "../assets/audio/soundfx/oracle_click.mp3",
-    "charCompleteSound" : "../assets/audio/soundfx/oracle_failure.mp3",
-    "gameCompleteSound": "../assets/audio/soundfx/oracle_success_hit.mp3",
-    "carveSound": "../assets/audio/soundfx/oracle_long_carve.mp3"
-}
-
-for (let k in audioToAdd){
-    createAudioFiles(k, audioToAdd[k]);
-} 
-
-Object.values(characters).forEach(char => {
-    createAudioFiles(char.modernCharacter, char.bckgrndAudio)
-})
-
-// const clickSound = new Audio("../assets/audio/soundfx/oracle_click.mp3");
-// const charCompleteSound = new Audio("../assets/audio/soundfx/oracle_failure.mp3");
-// const gameCompleteSound = new Audio("../assets/audio/soundfx/oracle_success_hit.mp3");
 
 document.addEventListener("click", () => {
-    clickSound.currentTime = 0;
-    clickSound.play();
+    AUDIO.clickSound.currentTime = 0;
+    AUDIO.clickSound.play();
 });
 
+
+
+/************** Handle Clicks ******* */
 
 
 
@@ -340,8 +364,8 @@ function isSuccess(el){
 }
 
 function showSuccess(){
-    charCompleteSound.currentTime = 0;
-    charCompleteSound.play();
+    AUDIO.charCompleteSound.currentTime = 0;
+    AUDIO.charCompleteSound.play();
     alert("Divination complete! Explore further?");
     setVisibility([defBtn, selectionBackBtn, detailBtn]);
 }

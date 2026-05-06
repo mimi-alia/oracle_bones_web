@@ -12,10 +12,10 @@ const REFERENCE_IMAGES = {
     "卜": "../assets/media/卜_type.skyfont.com.png",
 };
  
-const SIMILARITY_THRESHOLD = 0.80;
+const SIMILARITY_THRESHOLD = 0.85;
 const GUIDE_OPACITY        = 0.15;
 const STROKE_COLOR         = "#1a1a1a";
-const STROKE_WIDTH         = 22;
+const STROKE_WIDTH         = 20;
  
 let canvas, ctx;
 let offscreenCanvas, offscreenCtx;

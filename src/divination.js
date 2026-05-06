@@ -80,15 +80,7 @@ function createScriptDiv(characterObj){
         holderText.innerText = characterInfo.modernCharacter;
 
         imgDiv.appendChild(holderText);
-        imgDiv.style.border = "5px solid black";
-        imgDiv.style.margin = "2px";
-        imgDiv.style.width = "20%";        
-        imgDiv.style.height = "200px";
-
-        const image = document.createElement("img");
-        image.setAttribute("src", "#");
-        image.style.width = "inherit";
-        imgDiv.appendChild(image);
+        
 
         imagesFragment.appendChild(imgDiv);
     }
@@ -361,9 +353,6 @@ backgroundVid.playsInline = true;
 
 frontroomContainer.appendChild(backgroundVid);
 
-introBtn.addEventListener("click", () => {
-    playSegment(0.5, 4.5)
-})
 
 loopStart = 0;
 loopEnd = 0;
@@ -382,8 +371,20 @@ function playSegment(start, end) {
     backgroundVid.play();
 }
 
+introBtn.addEventListener("click", () => {
+    playSegment(0.5, 4.5)
+})
 
-//Character select and draw div functions and variables
+// document.addEventListener("click", (e) => {
+//     if (e.target.closest("#character-selection > div")) {
+//         console.log(e.target);
+//         playSegment(4.5, 5);
+//     }
+// });
+
+/********************************************************
+ * Character select and draw div functions and variables
+ ********************************************************/
 
 let currentSelection = null;
 let completionHistory = new Set();
@@ -588,7 +589,7 @@ function renderDefinitionsTable(characters){
                 cell.appendChild(linkList);
 
                 //otherwise, as long as the key isnt text or images, add the value to the cell's innerHTML
-                } else if (item !== "text" && item !== "images") {
+                } else if (item !== "text" && item !== "images" && item !== "bckgrndAudio") {
                     cell.innerHTML = entry[item];
                 }
 

@@ -51,17 +51,19 @@ table {
 	background-color: black;
 }
 
+html, body {
+	height: 100%;
+	overflow: hidden;
+}
+
+body {
+	position: relative;
+}
+
 .horizontal-layout {
 	display: flex;
 	flex-direction: row;
 	width: 100%;
-}
-
-.horizontal-layout > div {
-	width: 100%;
-	border: 5px solid black;
-    margin: 2px;
-    height: 200px;
 }
 
 
@@ -103,33 +105,25 @@ table {
 }
 
 /*********************************** Frontroom Page ******************************************/
+
 #intro-div {
-	position: relative;
-	left: 50%;
-	top: 100x;
-	width: 200px;
-	height: 400px;
-	z-index: 2;
+	position: absolute;
+	top: 45%;
+	left: 30%;
+  	width: 35%;
+	padding: 10px;
+
 }
 
 
-.frontroom.container {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	position: relative;
-	top: 250px;
-	margin: 0 10px;
-}
-
-.frontroom video {
-position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  z-index: 0;
+.frontroom.container video {
+	position: fixed;
+  	top: 0;
+  	left: 0;
+  	width: 100%;
+  	height: 100%;
+  	object-fit: cover;
+  	z-index: 0;
 }
 
 h1.frontroom {
@@ -137,17 +131,34 @@ h1.frontroom {
 	font-size: 20px;
 }
 
-div {
-	background-color:burlywood;
-	position: relative;
+#character-selection {
+	position: absolute;
+	top: 25%;
 	z-index: 2;
+	padding: 5px;
+	display: flex;
+    flex-wrap: wrap; 
+    justify-content: center;
+    gap: 5px;
+    width: fit-content;
+}
+
+#character-selection > div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+	background-color:burlywood;
+	width: 220px; 
+    height: 220px;
+	gap: 10px;
+    flex: 0 0 auto; 
+	margin: 14px;
 }
 
 #character-selection > div:hover {
 	background-color: red;
 
 }
-
 
 #character-selection > div > span {
 	font-size: 150px;
@@ -177,23 +188,68 @@ div {
 	visibility: hidden;
 }
 
+#selection-view {
+	display: grid;
+	grid-template-columns: repeat(5, 1fr [col-start]);
+	grid-template-rows: repeat(3, 100px [row-start]);
+}
+
+#selection-view button {
+	width: fit-content;
+}
+
+#selected-character-container {
+	grid-column-start: 3;
+	grid-row-start: 2;
+	justify-self: center;
+	max-width: fit-content;
+}
+
+button#selection-back {
+	grid-column-start: 3;
+	grid-row-start: 0;
+	justify-self: center;
+	max-height: 22px;
+}
+
+button#definitions {
+	grid-column-start: 1;
+	grid-row-start: 4;
+	justify-self: center;
+
+}
+
+button#details {
+	grid-column-start: 5;
+	grid-row-start: 4;
+	justify-self: center;
+}
 
 /*********************************** Character Draw View ******************************************/
 
 
 #character-draw {
 	background-color: wheat;
-	max-width: 50%;
-	position: relative;
-	left: 300px;
 	height: 500px;
 	width: 400px;
+}
+canvas {
+    width: 100%;
+    height: 100%;
 }
 
 /*********************************** Definitions View ******************************************/
 
+#definitions-view {
+	position: absolute;
+	top: 0;
+
+
+}
+
 #definitions-view > div > table {
 	border: 2px solid black;
+	background-color: aliceblue;
 	table-layout: auto;
   	width: 90%;
   	margin: 10px auto;

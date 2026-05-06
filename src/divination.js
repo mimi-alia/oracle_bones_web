@@ -606,7 +606,7 @@ function renderDefinitionsTable(characters){
                 cell.appendChild(linkList);
 
                 //otherwise, as long as the key isnt text or images, add the value to the cell's innerHTML
-                } else if (item !== "text" && item !== "images" && item !== "images") {
+                } else if (item !== "text" && item !== "images" && item !== "bckgrndAudio") {
                     cell.innerHTML = entry[item];
                 }
 

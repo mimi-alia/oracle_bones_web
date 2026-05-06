@@ -66,6 +66,12 @@ body {
 	width: 100%;
 }
 
+@media (max-width: 600px) {
+  body * {
+    visibility: hidden !important;
+  }
+}
+
 
 /************************************ Home Page *********************************************/
 

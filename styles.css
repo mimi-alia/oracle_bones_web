@@ -124,11 +124,29 @@ body {
 
 #intro-div {
 	position: absolute;
-	top: 45%;
+	top: 25%;
 	left: 30%;
   	width: 35%;
-	padding: 10px;
+	height: 400px;
+	padding: 20px;
 
+	background-color: antiquewhite;
+
+	overflow-y: auto;
+}
+
+#intro-div * {
+	line-height: 22px;
+	margin: 15px;
+}
+
+#intro-div ul li{
+	list-style: none;
+}
+
+#intro-div button {
+	position: relative;
+	left: 250px
 }
 
 
@@ -265,7 +283,7 @@ canvas {
 
 #definitions-view > div > table {
 	border: 2px solid black;
-	background-color: aliceblue;
+	background-color: antiquewhite;
 	table-layout: auto;
   	width: 90%;
   	margin: 10px auto;
@@ -280,7 +298,6 @@ td {
 th {
 	vertical-align: middle;
 	text-align:justify;
-	background-color: aliceblue;
 }
 
 tr {

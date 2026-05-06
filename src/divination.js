@@ -112,15 +112,32 @@ function initializeExperience(){
 
     const introTitle = document.createElement("h1");
     const introText = document.createElement("p");
+    const instructionText = document.createElement("p");
     const introButton = document.createElement("button");
+    const creditList = document.createElement("ul");
+    const credits = {
+        "Misha Alia Awad" : "Developer, Researcher of Oracle Bone Script",
+        "Neil Bhatia" : "Creative Writing and Design",
+        "Anna Likhanova" : "Developer",
+        "Jasper von Studnitz" : "Digital Art",
+        "Owen Setlik": "Audio & Sound",
+        "Huiwen Li" : "Continuing Associate Professor of Chinese, Linguistic & Historical Direction"
+    }
+
+    Object.entries(credits).forEach( ([k,v]) => {
+        const li = document.createElement("li");
+        li.innerHTML = k + " : " + v;
+        creditList.appendChild(li);
+    })
 
     introTitle.innerText = "About The Oracle Bones Demo"
-    introText.innerText = "Some stuff history whatever background about oracle bones and their use and why this game was made and what this game is for ahhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh"
+    introText.innerText = "Hello, and welcome to the demo of the Oracle Bones. This interactive experience will walk you through the inscription process of Oracle Bone Script (OBS), a writing system dating back to at least the Shang Dynasty of China. OBS is one of the oldest writing system in known history and acts a a primitive of modern Chinese characters and descendant character systems such as those in Japan, Korea, and Vietnam. Historically, OBS was used in a divination process in which a diviner appointed by the royal family, etched text into turtoise shells or ox bones and threw them into fire. Based on the cracking patters from the flame, the diviner would interpret the results of the prompt: usually a yes/no question about the status of warfare, agriculture, and the emporer's well being."
+
+    instructionText.innerText = "To play the game, enter the divination space. You will be prompted to select from 5 characters and taken to the inscription room where you will practice writing Oracle Bone Script. Once that has succeeded, you will be granted access to further information about the text and permitted to return to the divination space. Complete all characters to finish the divination.";
+
     introButton.innerText = "Continue";
 
-    
-
-    [introTitle, introText, introButton].forEach( el => {
+    [introTitle, introText, instructionText, creditList, introButton].forEach( el => {
         introDiv.appendChild(el);
     })
 
@@ -589,7 +606,7 @@ function renderDefinitionsTable(characters){
                 cell.appendChild(linkList);
 
                 //otherwise, as long as the key isnt text or images, add the value to the cell's innerHTML
-                } else if (item !== "text" && item !== "images" && item !== "bckgrndAudio") {
+                } else if (item !== "text" && item !== "images" && item !== "images") {
                     cell.innerHTML = entry[item];
                 }
 

@@ -277,8 +277,16 @@ canvas {
 #definitions-view {
 	position: absolute;
 	top: 0;
+	margin-top: 10px;
+	display: flex;
+	flex-direction: row-reverse;
+}
 
+#definitions-view button {
+	align-self: center;
+	margin-right: 10px;
 
+	width: fit-content;
 }
 
 #definitions-view > div > table {

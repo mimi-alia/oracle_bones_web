@@ -14,7 +14,7 @@ const REFERENCE_IMAGES = {
  
 const SIMILARITY_THRESHOLD = 0.85;
 const GUIDE_OPACITY        = 0.15;
-const STROKE_COLOR         = "#1a1a1a";
+const STROKE_COLOR         = "#503c24c3";
 const STROKE_WIDTH         = 20;
  
 let canvas, ctx;

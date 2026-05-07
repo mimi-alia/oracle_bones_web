@@ -201,19 +201,31 @@ function returnToFrontroom(){
 
 
 defBtn.addEventListener("click", () => {
-    setVisibility([definitionsView], [selectedCharacterView, defBtn, selectionBackBtn, detailBtn]);
+    setTimeout(() => {
+        setVisibility([definitionsView], [selectedCharacterView, defBtn, selectionBackBtn, detailBtn]);
+
+    }, 2500);
 })
 
 defBackBtn.addEventListener("click", () => {
-    setVisibility([selectedCharacterView], [definitionsView]);
+    setTimeout(() => {
+        setVisibility([selectedCharacterView], [definitionsView]);
+
+    }, 2500);
 })
 
 detailBtn.addEventListener("click", () => {
-    setVisibility([detailsView], [selectedCharacterView, defBtn, selectionBackBtn, detailBtn]);
+    setTimeout(() => {
+        setVisibility([detailsView], [selectedCharacterView, defBtn, selectionBackBtn, detailBtn]);
+
+    }, 2500);
 })
 
 detailBackBtn.addEventListener("click", () => {
-    setVisibility([selectedCharacterView], [detailsView]);
+    setTimeout(() => {
+        setVisibility([selectedCharacterView], [detailsView]);
+    }, 2500);
+
 })
 
 /********************************************************
@@ -386,8 +398,8 @@ function playSegment(start, end) {
     loopStart = start;
     loopEnd = end;
 
-    backgroundVid.currentTime = start;
 
+    backgroundVid.currentTime = start;
     backgroundVid.play();
 }
 
@@ -413,8 +425,10 @@ introBtn.addEventListener("click", () => {
 
 selectionBackBtn.addEventListener("click", () => {
     console.log("selection back button video event triggered")
-    playTransition(4.5, 6.5);
-    playSegment(0.5, 4.5);
+    // playSegment(4.5, 6.5, true); // the reverse is kinda ugly
+    setTimeout(() => {
+            playSegment(0.5, 4.5);
+        }, 2500);
     
 })
 
@@ -430,7 +444,42 @@ document.addEventListener("click", (e) => {
 
 defBtn.addEventListener("click", () => {
     console.log("define button video event triggered")
-    playSegment(15, 18)
+
+    playSegment(14, 17);
+
+    setTimeout(() => {
+            playSegment(15.5, 18);
+        }, 2500);
+});
+
+defBackBtn.addEventListener("click", () => {
+    console.log("define back button video event triggered")
+
+    //
+
+    setTimeout(() => {
+            playSegment(6.5, 8.5);
+        }, 2500);
+})
+
+detailBtn.addEventListener("click", () => {
+    console.log("detail button video event triggered")
+
+    playSegment(8.5, 10.7);
+
+    setTimeout(() => {
+            playSegment(10.7, 11.5);
+        }, 2500);
+});
+
+detailBackBtn.addEventListener("click", () => {
+    console.log("detail back button video event triggered")
+
+    // playSegment(11, 13);
+
+    setTimeout(() => {
+            playSegment(6.5, 8.5);
+        }, 2500);
 })
 
 /********************************************************

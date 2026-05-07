@@ -377,3 +377,36 @@ li {
 	list-style: square;
 	padding: 5px;
 }
+
+/*********************************** Details  View ******************************************/
+
+#detail-view {
+	position: absolute;
+	top: 0;
+	margin-top: 10px;
+	height: auto;
+}
+
+#detail-view button {
+	align-self: center;
+	margin-right: 10px;
+
+	width: fit-content;
+	position: fixed;
+	top: 50%;
+	left: 10px;
+}
+
+
+#detail-view div{
+	background-color: wheat;
+	position: fixed;
+	top: 45%;
+	left: 40%;
+	padding: 25px;
+	line-height: 20px;
+}
+
+#detail-view div h1{
+	
+}

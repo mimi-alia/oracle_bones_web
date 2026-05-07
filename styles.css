@@ -49,6 +49,8 @@ table {
 
 :root {
 	background-color: black;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 15px;
 }
 
 html, body {
@@ -82,6 +84,10 @@ body {
 	src: url("../assets/fonts/Zhi_Mang_Xing/ZhiMangXing-Regular.ttf");
 }
 
+@font-face {
+	font-family: "pinup";
+	src: url(./assets/fonts/PINUP.ttf);
+}
 /************************************ Home Page *********************************************/
 
 @keyframes flash {
@@ -107,9 +113,9 @@ body {
 
 #home .title {
   position: fixed;
-  bottom:300px;
+  bottom: 225px;
   z-index: 2;
-  color: #f1f1f1;
+  color: #ffcc00a8;
   width: 100%;
   padding: 20px;
 
@@ -117,7 +123,15 @@ body {
   flex-direction: column;
   align-items: center;
 
+  line-height: 55px;
+
+
   animation: flash 10s infinite;
+}
+
+#home .title h1 {
+	font-size: 100px;
+	font-family: pinup;
 }
 
 #start-button-section {

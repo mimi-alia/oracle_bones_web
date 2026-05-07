@@ -374,31 +374,37 @@ document.body.appendChild(backgroundVid);
 
 loopStart = 0;
 loopEnd = 0;
+
 backgroundVid.addEventListener("timeupdate", () => {
-    if (loopEnd > 0 && backgroundVid.currentTime >= loopEnd) {
+    if (backgroundVid.currentTime >= loopEnd) {
         backgroundVid.currentTime = loopStart;
     }
 });
-
-
 
 
 function playSegment(start, end) {
     loopStart = start;
     loopEnd = end;
 
-    backgroundVid.pause();
-
     backgroundVid.currentTime = start;
-
-    const playPromise = backgroundVid.play();
-
-    if (playPromise !== undefined) {
-        playPromise.catch(err => console.log(err));
-    }
 
     backgroundVid.play();
 }
+
+// function playTransition(start, end, isReverse){
+//     // loopStart = start;
+//     // loopEnd = end;
+
+//     backgroundVid.pause();
+//     backgroundVid.currentTime = start;
+
+//     if (isReverse){
+//         backgroundVid.reverse();
+//     }
+
+//     backgroundVid.play();
+
+// }
 
 introBtn.addEventListener("click", () => {
     console.log("intro button video event triggered")
@@ -407,13 +413,18 @@ introBtn.addEventListener("click", () => {
 
 selectionBackBtn.addEventListener("click", () => {
     console.log("selection back button video event triggered")
-    playSegment(0.5, 4.5)
+    playTransition(4.5, 6.5);
+    playSegment(0.5, 4.5);
+    
 })
 
 document.addEventListener("click", (e) => {
     if (e.target.closest("#character-selection > div")) {
         console.log(e.target);
-        playSegment(4.5, 7);
+        playSegment(4.5, 6.7);
+        setTimeout(() => {
+            playSegment(6.5, 8.5);
+        }, 2500);
     }
 });
 
@@ -447,7 +458,9 @@ function setCompleteStyle(charDivs){
 
 options.forEach(option => option.addEventListener("click", () => {
     selectCharacter(option);
-    setVisibility([selectedCharacterView], [frontroomContainer]);
+    setTimeout(() => {
+        setVisibility([selectedCharacterView], [frontroomContainer]);
+    }, 2500);
 }
 ))
 

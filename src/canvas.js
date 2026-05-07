@@ -69,7 +69,6 @@ function resetCanvas(char) {
 }
  
 function evaluateDrawing() {
-    console.log("evaluateDrawing called");
     if (!canvas || !ctx) return false;
 
     const drawn = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
@@ -90,14 +89,14 @@ function evaluateDrawing() {
     }
 
     if (referencePixels === 0) {
-        console.log("Using coverageCheck fallback");
+        // console.log("Using coverageCheck fallback");
         return coverageCheck(drawn);
     }
 
     const similarity = matchedPixels / referencePixels;
-    console.log(`Similarity: ${(similarity * 100).toFixed(1)}% (threshold: ${SIMILARITY_THRESHOLD * 100}%)`);
-    console.log("Reference Pixels:", referencePixels);
-    console.log("Matched Pixels:", matchedPixels);
+    // console.log(`Similarity: ${(similarity * 100).toFixed(1)}% (threshold: ${SIMILARITY_THRESHOLD * 100}%)`);
+    // console.log("Reference Pixels:", referencePixels);
+    // console.log("Matched Pixels:", matchedPixels);
     return similarity >= SIMILARITY_THRESHOLD;
 }
  
@@ -198,7 +197,7 @@ function applyStrokeStyles() {
 }
  
 function onMouseDown(e) {
-    console.log("Mouse down event triggered");
+    // console.log("Mouse down event triggered");
     isDrawing = true;
     const [x, y] = getPos(e);
     ctx.beginPath();
@@ -206,7 +205,7 @@ function onMouseDown(e) {
 }
  
 function onMouseMove(e) {
-    console.log("Mouse move event triggered");
+    // console.log("Mouse move event triggered");
 
     if (!isDrawing) return;
     const [x, y] = getPos(e);
@@ -217,7 +216,7 @@ function onMouseMove(e) {
 }
  
 function onMouseUp() {
-    console.log("Mouse up event triggered");
+    // console.log("Mouse up event triggered");
 
     isDrawing = false;
     ctx.beginPath();

@@ -9,15 +9,9 @@ backgroundVid.playsInline = true;
 
 homepage.appendChild(backgroundVid);
 
-loopStart = 0;
-loopEnd = 0;
 
-
-backgroundVid.addEventListener("timeupdate", () => {
-    if (backgroundVid.currentTime >= loopEnd) {
-        backgroundVid.currentTime = loopStart;
-    }
-});
+let loopStart = 0;
+let loopEnd = 0;
 
 
 function playSegment(start, end) {
@@ -27,7 +21,6 @@ function playSegment(start, end) {
     backgroundVid.currentTime = start;
     backgroundVid.play();
 }
-
 
 function changeRoom(link){
     window.location.href = link;
@@ -39,6 +32,13 @@ function changeRoom(link){
 }
 
 
+backgroundVid.addEventListener("timeupdate", () => {
+    if (backgroundVid.currentTime >= loopEnd) {
+        backgroundVid.currentTime = loopStart;
+    }
+});
+
+
 
 const audioToPlay = document.querySelector("#audioFile");
 const startBtn = document.querySelector("#startBtn");
@@ -46,9 +46,8 @@ const startBtn = document.querySelector("#startBtn");
 startBtn.addEventListener("click", () => {
         audioToPlay.play();
         startBtn.remove();
-        homepage.style.visibility = "visible";
-
         playSegment(0.5, 4.5);
+        homepage.style.visibility = "visible";
 });
 
 homepage.addEventListener("click", function(){

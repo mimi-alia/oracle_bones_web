@@ -366,39 +366,61 @@ const backgroundVid = document.createElement("video");
 backgroundVid.setAttribute("src", "../assets/media/camera_swap.mp4");
 backgroundVid.autoplay = true;
 backgroundVid.controls = false;
-backgroundVid.muted = true;
+backgroundVid.muted = false;
 backgroundVid.playsInline = true;
 
-frontroomContainer.appendChild(backgroundVid);
+document.body.appendChild(backgroundVid);
 
 
 loopStart = 0;
 loopEnd = 0;
 backgroundVid.addEventListener("timeupdate", () => {
-    if (backgroundVid.currentTime >= loopEnd) {
+    if (loopEnd > 0 && backgroundVid.currentTime >= loopEnd) {
         backgroundVid.currentTime = loopStart;
     }
 });
+
+
 
 
 function playSegment(start, end) {
     loopStart = start;
     loopEnd = end;
 
+    backgroundVid.pause();
+
     backgroundVid.currentTime = start;
+
+    const playPromise = backgroundVid.play();
+
+    if (playPromise !== undefined) {
+        playPromise.catch(err => console.log(err));
+    }
+
     backgroundVid.play();
 }
 
 introBtn.addEventListener("click", () => {
+    console.log("intro button video event triggered")
     playSegment(0.5, 4.5)
 })
 
-// document.addEventListener("click", (e) => {
-//     if (e.target.closest("#character-selection > div")) {
-//         console.log(e.target);
-//         playSegment(4.5, 5);
-//     }
-// });
+selectionBackBtn.addEventListener("click", () => {
+    console.log("selection back button video event triggered")
+    playSegment(0.5, 4.5)
+})
+
+document.addEventListener("click", (e) => {
+    if (e.target.closest("#character-selection > div")) {
+        console.log(e.target);
+        playSegment(4.5, 7);
+    }
+});
+
+defBtn.addEventListener("click", () => {
+    console.log("define button video event triggered")
+    playSegment(15, 18)
+})
 
 /********************************************************
  * Character select and draw div functions and variables
@@ -522,6 +544,7 @@ function checkSuccess(el){
 // }
 
 function setVisibility(visArr,hidArr){
+    console.log("set visibility function triggered")
     if (visArr){
         visArr.forEach(el => {
             el.style.visibility = "visible";

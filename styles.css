@@ -72,6 +72,15 @@ body {
   }
 }
 
+@font-face {
+	font-family: "liuJianMao";
+	src: url("../assets/fonts/Liu_Jian_Mao_Cao/LiuJianMaoCao-Regular.ttf");
+}
+
+@font-face {
+	font-family: "zhiMangXing";
+	src: url("../assets/fonts/Zhi_Mang_Xing/ZhiMangXing-Regular.ttf");
+}
 
 /************************************ Home Page *********************************************/
 
@@ -187,7 +196,6 @@ h1.frontroom {
     display: flex;
     justify-content: center;
     align-items: center;
-	background-color:burlywood;
 	width: 220px; 
     height: 220px;
 	gap: 10px;
@@ -196,27 +204,32 @@ h1.frontroom {
 }
 
 #character-selection > div:hover {
-	background-color: red;
+	cursor: pointer;
 
 }
 
 #character-selection > div > span {
-	font-size: 150px;
+	font-family: zhiMangXing;
+	font-size: 250px;
+	color: #ffcc00a8;
+	text-shadow: #e3600e 1px 0 15px;
 	vertical-align: middle;
 	text-align: center;
 }
 
 #character-selection > div:hover > span{
-	color: white;
+	color: #ffcc00cb;
+	text-shadow: #ffcc00cb;
 }
 
-#character-selection > div.completed {
-	background-color: gold;
+#character-selection > div.completed > span{
+	color: #8a9ba056;
+	text-shadow:#7f999e 1px 0 10px;
 }
 
-#character-selection > div.completed:hover {
-	box-shadow: gold;
-}
+/* #character-selection > div.completed:hover > span{
+	color: gold;
+} */
 
 /*********************************** Selected Character View ******************************************/
 

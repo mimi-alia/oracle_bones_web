@@ -317,11 +317,14 @@ selectionBackBtn.addEventListener("click", () => {
 options.forEach(option => option.addEventListener("click", () => {
     const charKey = option.dataset.id;
 
-    handleAudioSwitches(charKey, {
-    loop: true,
-    currentTime: 0,
-    volume: 0.5
-});
+    setTimeout(() => {
+        handleAudioSwitches(charKey, {
+        loop: true,
+        currentTime: 0,
+        volume: 0.5
+        });
+    }, 2500)
+    
 }
 ))
 

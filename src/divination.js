@@ -185,7 +185,7 @@ const detailBackBtn = document.querySelector("#detail-back");
 //Button functionality
 
 selectionBackBtn.addEventListener("click", () => {
-    setTimeout(returnToFrontroom, 2500);
+    returnToFrontroom();
 })
 
 selectionBackBtn.addEventListener("click", () => {
@@ -372,10 +372,6 @@ selectedCharacterDrawSpace.addEventListener("mousemove", () => {
         AUDIO.carveSound.currentTime = 0;
     }, 200); 
 });
-
-/********************************************************
- * Background Video 
- ********************************************************/
 
 /********************************************************
  * Background Video 

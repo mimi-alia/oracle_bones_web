@@ -377,114 +377,198 @@ selectedCharacterDrawSpace.addEventListener("mousemove", () => {
  * Background Video 
  ********************************************************/
 
+/********************************************************
+ * Background Video 
+ ********************************************************/
+
 const backgroundVid = document.createElement("video");
-backgroundVid.setAttribute("src", "../assets/media/camera_swap.mp4");
-backgroundVid.autoplay = true;
+
+backgroundVid.src = "../assets/media/camera_swap.mp4";
+backgroundVid.autoplay = false;
 backgroundVid.controls = false;
-backgroundVid.muted = false;
+backgroundVid.muted = true;
 backgroundVid.playsInline = true;
+backgroundVid.preload = "auto";
 
 document.body.appendChild(backgroundVid);
 
 
-loopStart = 0;
-loopEnd = 0;
+/***********************
+ * VIDEO STATE
+ ************************/
+
+let loopStart = 0;
+let loopEnd = 0;
+let shouldLoop = false;
+let activeTimeout = null;
+
+
+/***********************
+ * VIDEO LOOP HANDLER
+ ************************/
 
 backgroundVid.addEventListener("timeupdate", () => {
+
+    if (!shouldLoop) return;
+
     if (backgroundVid.currentTime >= loopEnd) {
         backgroundVid.currentTime = loopStart;
     }
 });
 
 
-function playSegment(start, end) {
+/***********************
+ * CORE PLAY FUNCTION
+ ************************/
+
+function playSegment(start, end, loop = false) {
+
+    // cancel pending transitions
+    if (activeTimeout) {
+        clearTimeout(activeTimeout);
+        activeTimeout = null;
+    }
+
+    shouldLoop = loop;
+
     loopStart = start;
     loopEnd = end;
 
+    backgroundVid.pause();
 
     backgroundVid.currentTime = start;
-    backgroundVid.play();
+
+    backgroundVid.onseeked = () => {
+
+        const playPromise = backgroundVid.play();
+
+        if (playPromise !== undefined) {
+            playPromise.catch(err => console.log(err));
+        }
+
+        backgroundVid.onseeked = null;
+    };
 }
 
-// function playTransition(start, end, isReverse){
-//     // loopStart = start;
-//     // loopEnd = end;
 
-//     backgroundVid.pause();
-//     backgroundVid.currentTime = start;
+/***********************
+ * TRANSITION HELPER
+ ************************/
 
-//     if (isReverse){
-//         backgroundVid.reverse();
-//     }
+function transitionVideo(
+    transitionStart,
+    transitionEnd,
+    idleStart,
+    idleEnd
+) {
 
-//     backgroundVid.play();
+    // play transition ONCE
+    playSegment(transitionStart, transitionEnd, false);
 
-// }
+    // calculate exact duration
+    const duration =
+        (transitionEnd - transitionStart) * 1000;
+
+    // after transition, begin idle loop
+    activeTimeout = setTimeout(() => {
+
+        playSegment(idleStart, idleEnd, true);
+
+    }, duration);
+}
+
+
+/********************************************************
+ * VIDEO EVENTS
+ ********************************************************/
+
+
+/******** FRONTROOM IDLE ********/
 
 introBtn.addEventListener("click", () => {
-    console.log("intro button video event triggered")
-    playSegment(0.5, 4.5)
-})
+
+    console.log("intro video");
+
+    playSegment(0.5, 4.5, true);
+});
+
+
+/******** RETURN TO FRONTROOM ********/
 
 selectionBackBtn.addEventListener("click", () => {
-    console.log("selection back button video event triggered")
-    // playSegment(4.5, 6.5, true); // the reverse is kinda ugly
-    setTimeout(() => {
-            playSegment(0.5, 4.5);
-        }, 2500);
-    
-})
+
+    console.log("back to frontroom");
+
+    playSegment(0.5, 4.5, true);
+});
+
+
+/******** CHARACTER SELECT ********/
 
 document.addEventListener("click", (e) => {
+
     if (e.target.closest("#character-selection > div")) {
-        console.log(e.target);
-        playSegment(4.5, 6.7);
-        setTimeout(() => {
-            playSegment(6.5, 8.5);
-        }, 2500);
+
+        console.log("character select");
+
+        transitionVideo(
+            4.0, 7.0,     // transition
+            6.5, 8.5      // idle loop
+        );
     }
 });
 
+
+/******** DEFINITIONS ********/
+
 defBtn.addEventListener("click", () => {
-    console.log("define button video event triggered")
 
-    playSegment(14, 17);
+    console.log("definitions");
 
-    setTimeout(() => {
-            playSegment(15.5, 18);
-        }, 2500);
+    transitionVideo(
+        15.0, 17.5,
+        17, 18.0
+    );
 });
+
+
+/******** DEFINITIONS BACK ********/
 
 defBackBtn.addEventListener("click", () => {
-    console.log("define back button video event triggered")
 
-    //
+    console.log("definitions back");
 
-    setTimeout(() => {
-            playSegment(6.5, 8.5);
-        }, 2500);
-})
-
-detailBtn.addEventListener("click", () => {
-    console.log("detail button video event triggered")
-
-    playSegment(8.5, 10.7);
-
-    setTimeout(() => {
-            playSegment(10.7, 11.5);
-        }, 2500);
+    transitionVideo(
+        18, 20,
+        6.5, 8.5  
+    );
 });
 
+
+/******** DETAILS ********/
+
+detailBtn.addEventListener("click", () => {
+
+    console.log("details");
+
+    transitionVideo(
+        8.5, 10.7,
+        10.7, 11.5
+    );
+});
+
+
+/******** DETAILS BACK ********/
+
 detailBackBtn.addEventListener("click", () => {
-    console.log("detail back button video event triggered")
 
-    // playSegment(11, 13);
+    console.log("details back");
 
-    setTimeout(() => {
-            playSegment(6.5, 8.5);
-        }, 2500);
-})
-
+    transitionVideo(
+        12, 14,
+        6.5, 8.5
+    );
+});
 /********************************************************
  * Character select and draw div functions and variables
  ********************************************************/

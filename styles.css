@@ -68,6 +68,13 @@ body {
 	width: 100%;
 }
 
+h1:hover,
+p:hover,
+li:hover,
+span:hover {
+	cursor:default;
+}
+
 @media (max-width: 600px) {
   body * {
     visibility: hidden !important;

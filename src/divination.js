@@ -131,10 +131,10 @@ function initializeExperience(){
     })
 
     introTitle.innerText = "About The Oracle Bones Demo"
-    introText.innerText = "Hello, and welcome to the demo of the Oracle Bones. This interactive experience will walk you through the inscription process of Oracle Bone Script (OBS), a writing system dating back to at least the Shang Dynasty of China. OBS is one of the oldest writing systems in known history and acts as a primitive of modern Chinese characters and descendant character systems such as those in Japan, Korea, and Vietnam. Historically, OBS was used in a divination process in which a diviner appointed by the royal family etched text into tortoise shells or ox bones and threw them into fire. Based on the cracking patterns from the flame, the diviner would interpret the results of the prompt: usually a yes/no question about the status of warfare, agriculture, and the emperor's well being."
+    introText.innerText = "The Oracle Bones Project is an educational, interactive experience designed to walk players through the history and creation of oracle bones and the etymology of Mandarin characters since the Shang Dynasty. The oracle bones were a form of divination that involved carving a question into a bone or tortoise shell, cracking the bone in a fire, and then interpreting answers the cracks revealed. They are the primary historical record of the time and the earliest known extensive record of ancient Chinese. Our game will offer a unique, tactile glimpse into a relatively obscure, understudied part of history."
 
 
-    instructionText.innerText = "To play the game, enter the divination space. You will be prompted to select from 5 characters and taken to the inscription room where you will practice writing Oracle Bone Script. Once that has succeeded, you will be granted access to further information about the text and permitted to return to the divination space. Complete all characters to finish the divination.";
+    instructionText.innerText = "To play the demo, enter the divination space. You will be prompted to select from 5 characters and taken to the inscription room where you will practice writing Oracle Bone Script. Once that has succeeded, you will be granted access to further information about the text and permitted to return to the divination space. Complete all characters to finish the divination.";
 
     introButton.innerText = "Continue";
 

@@ -17,7 +17,7 @@ const characters = {
         modernCharacter: "好",
         pinyin: "hǎo",
         radicals:["女 (nǚ) woman", "子 (zǐ) child"],
-        definition:"(lit\）woman good. Here, the name of Fu Hao, a wife of the emperor leading the battle",
+        definition:"(lit\）Good  well. Here, the name of Fu Hao, a wife of the emperor leading the battle",
         text: "",
         references: ["http://jiaguwen.shufami.com/?char=%E5%A6%87&la", "http://jiaguwen.shufami.com/?char=%E5%"],
         images: "",

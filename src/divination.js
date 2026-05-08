@@ -535,7 +535,7 @@ defBackBtn.addEventListener("click", () => {
     console.log("definitions back");
 
     transitionVideo(
-        18, 20,
+        18, 20.5,
         6.5, 8.5  
     );
 });

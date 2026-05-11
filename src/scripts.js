@@ -54,6 +54,7 @@ homepage.addEventListener("click", function(){
     playSegment(4.5, 8);
 
     setTimeout(() => {
-        changeRoom("../enter/divination.html");
+        changeRoom("enter/divination.html"); 
+        // enter/divination.html
     }, 2500);
 });

@@ -93,7 +93,7 @@ span:hover {
 
 @font-face {
 	font-family: "pinup";
-	src: url(/assets/fonts/PINUP.ttf);
+	src: url("assets/fonts/PINUP.ttf");
 }
 
 @keyframes flash {

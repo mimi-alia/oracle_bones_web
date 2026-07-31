@@ -83,12 +83,12 @@ span:hover {
 
 @font-face {
 	font-family: "liuJianMao";
-	src: url("/assets/fonts/Liu_Jian_Mao_Cao/LiuJianMaoCao-Regular.ttf");
+	src: url("assets/fonts/Liu_Jian_Mao_Cao/LiuJianMaoCao-Regular.ttf");
 }
 
 @font-face {
 	font-family: "zhiMangXing";
-	src: url("/assets/fonts/Zhi_Mang_Xing/ZhiMangXing-Regular.ttf");
+	src: url("assets/fonts/Zhi_Mang_Xing/ZhiMangXing-Regular.ttf");
 }
 
 @font-face {

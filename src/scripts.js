@@ -1,7 +1,7 @@
 const homepage = document.querySelector("#home");
 
 const backgroundVid = document.createElement("video");
-backgroundVid.setAttribute("src", "../assets/media/camera_swap.mp4");
+backgroundVid.setAttribute("src", "assets/media/camera_swap.mp4"); 
 backgroundVid.autoplay = true;
 backgroundVid.controls = false;
 backgroundVid.muted = true;
